@@ -1,12 +1,11 @@
 import React from "react";
-import { Card, CardContent, CardHeader, Button, Box } from "@mui/material";
-import { useRouter } from "next/router";
-import { List, ListItemButton, ListItemText, Link } from "@mui/material";
+import { List, ListItemButton, ListItemText } from "@mui/material";
+import Link from "next/link";
 
 const NavigationSideBar = () => {
   const NavigationSideBar = [
     { name: "Dashboard", path: "/admin/home" },
-    { name: "Profile", path: "admin/profile" },
+    { name: "Profile", path: "/admin/profile" },
     { name: "Add Admin", path: "/" },
     { name: "Delete Admin", path: "/" },
     { name: "student", path: "/" },
@@ -28,7 +27,7 @@ const NavigationSideBar = () => {
           sx={{ textDecoration: "none" }}
         >
           <ListItemButton>
-            <ListItemText primary={item.name} href />
+            <ListItemText primary={item.name} />
           </ListItemButton>
         </Link>
       ))}

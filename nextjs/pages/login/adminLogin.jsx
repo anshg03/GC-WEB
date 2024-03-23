@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 
-const textFieldStyle = {
+export const textFieldStyle = {
   marginBottom: "10px",
   width: "100%",
   "& input": {
