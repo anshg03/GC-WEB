@@ -7,7 +7,7 @@ const handler = async (req, res) => {
     try {
         const hashedEmail = bcrypt.hash(studentEmail, 10);
         const existingFeedback = feedback.findOne({studentEmail: hashedEmail})
-        if (hashedEmail) {
+        if (existingFeedback) {
             return res.status(400).json({
                 success: false,
                 message: "Feedback already recieved. Ypu can not give multiple feedbacks"
