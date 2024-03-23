@@ -6,7 +6,7 @@ const handler = async (req, res) => {
     const { name, dob, branch, contactNumber, email, designation } = req.body;
     const existingFaculty = await faculty.findOne({ email });
     if (!existingFaculty) {
-      return res.status(404).json({ message: "Student not found" });
+      return res.status(404).json({ message: "Faculty not found" });
     }
     existingFaculty.name = name;
     existingFaculty.dob = dob;
@@ -18,7 +18,7 @@ const handler = async (req, res) => {
     existingFaculty.designation = designation;
     const updatedFaculty = await existingFaculty.save();
     res.status(200).json({
-      message: "Student information updated successfully",
+      message: "Faculty information updated successfully",
       student: updatedFaculty,
     });
   } catch (error) {
