@@ -26,6 +26,14 @@ const subjectSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "attendence",
   },
+  instructorName: {
+    type: String,
+    required: true,
+  },
+  credits: {
+    type: Number,
+	required: true
+  },
 });
 
 export default mongoose.model("subject", subjectSchema);
