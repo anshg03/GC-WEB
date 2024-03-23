@@ -40,11 +40,11 @@ const AdminCard = ({ children }) => {
           }
         />
 
-        <Box display={"flex"} flexDirection={"row"} gap={"4%"}>
+        <Box display={"flex"} flexDirection={"row"} gap={"4%"} height={"100%"}>
           <CardContent
             sx={{
               width: "25%",
-              maxHeight: "80%",
+              height: "80%",
               overflow: "auto",
               "&::-webkit-scrollbar": {
                 width: "10px",
@@ -63,7 +63,7 @@ const AdminCard = ({ children }) => {
             <NavigationSideBar />
           </CardContent>
           <CardContent
-            sx={{ width: "70%", maxHeight: "80%", overflow: "auto" }}
+            sx={{ width: "70%", height: "80%" }}
           >
             {children}
           </CardContent>

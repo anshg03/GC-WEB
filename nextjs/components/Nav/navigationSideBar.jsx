@@ -5,15 +5,15 @@ import Link from "next/link";
 const NavigationSideBar = () => {
   const NavigationSideBar = [
     { name: "Dashboard", path: "/admin/home" },
-    { name: "Profile", path: "/admin/profile" },
-    { name: "Add Admin", path: "/" },
-    { name: "Delete Admin", path: "/" },
-    { name: "student", path: "/" },
-    { name: "profiles", path: "/" },
-    { name: "courses", path: "/" },
-    { name: "attendance records", path: "/" },
-    { name: "grading", path: "/" },
-    { name: "feedback analysis", path: "/" },
+    // { name: "Profile", path: "/admin/profile" },
+    // { name: "Add Admin", path: "/" },
+    // { name: "Delete Admin", path: "/" },
+    { name: "Student", path: "/admin/student" },
+    // { name: "Profiles", path: "/" },
+    { name: "Courses", path: "/" },
+    { name: "Attendance records", path: "/" },
+    { name: "Grading", path: "/" },
+    { name: "Feedback analysis", path: "/" },
   ];
 
   return (
