@@ -11,7 +11,7 @@ const handler = async (req, res) => {
       department,
       totalLectures,
     } = req.body;
-    const newSubject = await new subject({
+    const newSubject =new subject({
       subjectCode: subjectCode,
       subjectName: subjectName,
       department: department,
