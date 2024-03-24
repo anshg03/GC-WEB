@@ -2,18 +2,47 @@ import React, { useState, useEffect } from "react";
 import AdminCard from "../../components/AdminCard";
 import { Box, TextField, Grid, InputLabel } from "@mui/material";
 import { textFieldStyle } from "../../pages/login/adminLogin";
+import { useRouter } from "next/router";
 
 const Profile = () => {
+  const router = useRouter()
   const [data, setData] = useState({
-    name: "John Doe",
-    email: "john.doe@example.com",
-    dob: "1990-01-01",
-    username: "johndoe",
-    department: "Sales",
-    contactno: "1234567890",
-    joiningyr: "2020",
+    
   });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (!localStorage.getItem("adminToken")) {
+          router.push("../login/adminLogin");
+          return;
+        }
 
+        const response = await fetch("../api/Admin/getAdminProfile", {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            token: localStorage.getItem("adminToken"),
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch profile data");
+        }
+
+        const responseData = await response.json();
+        // Remove any circular references from the fetched data
+        const sanitizedData = removeCircularReferences(responseData);
+        setData(sanitizedData);
+      } catch (error) {
+        console.error("Error fetching profile data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   const fields = [
     { name: "name", label: "Name" },
     { name: "email", label: "Email" },
@@ -24,15 +53,15 @@ const Profile = () => {
     { name: "joiningyr", label: "Joining Year" },
   ];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("/api/user"); // Replace with your API endpoint
-      const data = await response.json();
-      setData(data);
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await fetch("/api/user"); // Replace with your API endpoint
+  //     const data = await response.json();
+  //     setData(data);
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   return (
     <AdminCard>

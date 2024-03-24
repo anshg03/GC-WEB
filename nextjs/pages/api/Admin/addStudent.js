@@ -1,9 +1,9 @@
 import student from "../../../models/student.js";
-import connectDB from "../../../middleware/mongoose";
+import connectDB from "../../../middlewares/mongoose.js";
 import faculty from "../../../models/faculty.js";
 import branch from "../../../models/branch.js";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import subject from "../../../models/subject";
 
 const handler = async (req, res) => {
@@ -13,11 +13,8 @@ const handler = async (req, res) => {
       dob,
       department,
       contactNumber,
-      avatar,
       email,
-      section,
       gender,
-      batch,
       year,
     } = req.body;
     const existingStudent = await student.findOne({ email });
@@ -25,10 +22,10 @@ const handler = async (req, res) => {
       errors.emailError = "Email already exists";
       return res.status(400).json(errors);
     }
+
     const existingDepartment = await branch.findOne({ department });
     let departmentHelper = existingDepartment.departmentCode;
-
-    const students = await student.find({ department });
+    const students = await student.find({ branch })
     let helper;
     if (students.length < 10) {
       helper = "00" + students.length.toString();
@@ -37,13 +34,13 @@ const handler = async (req, res) => {
     } else {
       helper = students.length.toString();
     }
+
     var date = new Date();
     var components = ["STU", date.getFullYear(), departmentHelper, helper];
 
-    var username = components.join("");
+    var rollNumber = components.join("");
     let hashedPassword;
     const newDob = dob.split("-").reverse().join("-");
-
     hashedPassword = await bcrypt.hash(newDob, 10);
     var passwordUpdated = false;
 
@@ -51,24 +48,25 @@ const handler = async (req, res) => {
       name,
       dob,
       password: hashedPassword,
-      username,
+      rollNumber,
       branch,
       contactNumber,
       email,
-      section,
       gender,
-      batch,
       year,
       passwordUpdated,
     });
     await newStudent.save();
+
     const subjects = await subject.find({ department, year });
+    console.log(department, subjects)
     if (subjects.length !== 0) {
       for (var i = 0; i < subjects.length; i++) {
         newStudent.subjects.push(subjects[i]._id);
       }
     }
     await newStudent.save();
+
     return res.status(200).json({
       success: true,
       message: "Student registerd successfully",

@@ -2,18 +2,27 @@ import Facultylayout from '../components/facultylayout'
 import React, { useState } from 'react';
 
 function UpdatePasswordBody() {
-    const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
-        if (newPassword !== confirmNewPassword) {
+        if (newPassword !== confirmNewPassword && localStorage.getItem("facultyToken")) {
             setErrorMessage("New password and confirm new password do not match");
         } else {
-            // Reset error message and perform password update logic
-            setErrorMessage("");
+            await fetch("../api/Faculty/updatePassword", {
+                mode: "cors",
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    newPassword: newPassword,
+                    confirmNewPassword: confirmNewPassword,
+                    token: localStorage.getItem("facultyToken")
+                })
+            })
             // Add your password update logic here
             alert("Password Updated Successfully")
         }
