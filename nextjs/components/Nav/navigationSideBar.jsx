@@ -14,6 +14,7 @@ const NavigationSideBar = () => {
     { name: "Attendance records", path: "/" },
     { name: "Grading", path: "/" },
     { name: "Feedback analysis", path: "/" },
+    {name:"Add Branch", path:"/admin/addbranch"}
   ];
 
   return (
