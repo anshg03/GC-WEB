@@ -22,7 +22,7 @@ const AdminCard = ({ children }) => {
       <Card
         sx={{
           width: "80%",
-          height: "80%",
+          height: "90%",
           display: "flex",
           flexDirection: "column",
         }}
@@ -63,7 +63,7 @@ const AdminCard = ({ children }) => {
             <NavigationSideBar />
           </CardContent>
           <CardContent
-            sx={{ width: "70%", height: "80%" }}
+            sx={{ width: "70%", height: "80%", overflow: "auto"}}
           >
             {children}
           </CardContent>
