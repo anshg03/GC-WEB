@@ -5,7 +5,7 @@ import { textFieldStyle } from "../../pages/login/adminLogin";
 
 const Home = () => {
   const [data, setData] = useState({
-    name: "John Doe",
+    name: "John De",
     email: "john.doe@example.com",
     dob: "1990-01-01",
     username: "johndoe",
