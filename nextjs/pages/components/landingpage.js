@@ -37,7 +37,7 @@ function Landingpage() {
       </div>
 
       <div className='flex fixed top-5 right-5 shadow-xl'>
-        <Link href='/login/adminLogin'>
+        <Link href='/admin/adminlogin'>
         <button className='pl-4 pr-2 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 hover:scale-105 transition-all'>
           Admin Login<KeyboardArrowRightIcon/>
         </button>

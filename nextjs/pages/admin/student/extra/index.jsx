@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { PersonAdd, Update, Delete, Group } from "@mui/icons-material";
-import AdminCard from "../../../components/AdminCard";
+import AdminCard from "../../../../components/AdminCard";
 
 const cards = [
   { title: "All Students", icon: <Group />, route: "/admin/student/students" },

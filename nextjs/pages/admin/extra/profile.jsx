@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import AdminCard from "../../components/AdminCard";
+import AdminCard from "../../../components/AdminCard";
 import { Box, TextField, Grid, InputLabel } from "@mui/material";
-import { textFieldStyle } from "../../pages/login/adminLogin";
+import { textFieldStyle } from "../../login/adminLogin";
 import { useRouter } from "next/router";
 
 const Profile = () => {

@@ -20,8 +20,8 @@ import {
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { DatePicker } from "@mui/lab";
-import AdminCard from "../../../components/AdminCard";
-import { textFieldStyle } from "../../login/adminLogin";
+import AdminCard from "../../../../components/AdminCard";
+import { textFieldStyle } from "../../../login/adminLogin";
 
 const CustomDatePicker = ({ id, name, value, onChange, error, helperText }) => {
   return (
