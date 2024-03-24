@@ -9,7 +9,7 @@ const NavigationSideBar = () => {
     // { name: "Add Admin", path: "/" },
     // { name: "Delete Admin", path: "/" },
     { name: "Student", path: "/admin/student" },
-    // { name: "Profiles", path: "/" },
+    { name: "Faculty", path: "/admin/faculty" },
     { name: "Courses", path: "/" },
     { name: "Attendance records", path: "/" },
     { name: "Grading", path: "/" },
