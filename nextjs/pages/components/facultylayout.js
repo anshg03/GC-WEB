@@ -52,7 +52,7 @@ function Facultylayout({children}) {
           </aside>
     
           {/* Main content */}
-          <main className="flex-1 p-4 overflow-auto">
+          <main className="flex-1 p-4 overflow-auto my-2">
             
             {children}
     
