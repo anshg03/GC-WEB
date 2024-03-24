@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Adminlayout from "../../components/adminlayout"
+import Adminlayout from "../components/adminlayout"
 
 function AddBranchComponent() {
     const [branchCode, setBranchCode] = useState('');
@@ -50,19 +50,19 @@ function AddBranchComponent() {
 
     return (
         <div className="container mx-auto p-4">
-            <h2 className="text-2xl font-bold mb-4">Add Branch</h2>
+            <h2 className="text-2xl font-bold mb-4 text-green-500 ">Add Branch</h2>
             <div className='flex gap-4'>
             <div className="mb-4">
                 <label className="block mb-2 font-semibold">Branch Code:</label>
-                <input type="text" value={branchCode} onChange={handleBranchCodeChange} className="border rounded px-3 py-2 w-64" />
+                <input placeholder='Enter Branch Code' type="text" value={branchCode} onChange={handleBranchCodeChange} className="border rounded px-3 py-2 w-64" />
             </div>
             <div className="mb-4">
                 <label className="block mb-2 font-semibold">Branch Name:</label>
-                <input type="text" value={branchName} onChange={handleBranchNameChange} className="border rounded px-3 py-2 w-64" />
+                <input placeholder='Enter Branch Name' type="text" value={branchName} onChange={handleBranchNameChange} className="border rounded px-3 py-2 w-64" />
             </div>
             </div>
             <button onClick={handleAddBranch} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Branch</button>
-            <hr className="my-4" />
+            <hr className="mt-5" />
             <div className="container mx-auto p-4">
             <h2 className="text-2xl font-bold mb-4 text-center">All Branches</h2>
             <div className="overflow-x-auto">
@@ -89,7 +89,7 @@ function AddBranchComponent() {
 }
 
 
-function addbranch() {
+function AddBranch() {
   return (
     <>
       <Adminlayout>
@@ -99,5 +99,5 @@ function addbranch() {
   )
 }
 
-export default addbranch
+export default AddBranch
 
