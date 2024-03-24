@@ -30,7 +30,7 @@ function Dashboardbody() {
     return (
       <>
       <div className="flex text-gray-400 items-center space-x-2 mb-4,mx-4">
-          < HomeIcon  className="text-3xl text-blue-600"/>
+          <HomeIcon  className="text-3xl text-blue-600"/>
           <h1 className="text-2xl text-blue-600 font-bold pl-1"> {facultyName}</h1>
         </div>
       <div className="max-w-screen-md mx-auto pt-4 overflow-auto">

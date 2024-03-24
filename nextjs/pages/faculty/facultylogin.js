@@ -19,17 +19,17 @@ const facultylogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch("../api/Faculty/login", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(faculty)
-    }).then(res => res.json())
-    .then(res => console.log(res))
-    if (username === 'faculty' && password === 'password') {
-      
+    // await fetch("../api/Faculty/login", {
+    //   method: "POST",
+    //   mode: "cors",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify(faculty)
+    // }).then(res => res.json())
+    // .then(res => console.log(res))
+    if (faculty.email === 'faculty@email.com' && faculty.password === 'password') {
+      console.log('Logged in');
       router.push("/faculty/dashboard")
     } else {
       setError('Invalid username or password');

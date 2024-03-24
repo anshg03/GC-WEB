@@ -1,5 +1,13 @@
 import React from "react";
-import { Card, CardContent, CardHeader, Button, Box } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Button,
+  Box,
+  Avatar,
+  IconButton, Typography,
+} from "@mui/material";
 import { useRouter } from "next/router";
 import NavigationSideBar from "./Nav/navigationSideBar";
 
@@ -25,27 +33,19 @@ const AdminCard = ({ children }) => {
           height: "90%",
           display: "flex",
           flexDirection: "column",
+          bgcolor: "rgb(209 213 219)",
+          color: "white",
+          borderRadius: "30px",
+          border: "2px solid #fff",
         }}
       >
-        <CardHeader
-          title={
-            <Box display="flex" justifyContent="center" width="100%">
-              Admin Panel
-            </Box>
-          }
-          action={
-            <Button variant="contained" color="primary" onClick={handleLogout}>
-              Logout
-            </Button>
-          }
-        />
-
         <Box display={"flex"} flexDirection={"row"} gap={"4%"} height={"100%"}>
           <CardContent
             sx={{
               width: "25%",
-              height: "80%",
+              height: "100%",
               overflow: "auto",
+              pt:5,
               "&::-webkit-scrollbar": {
                 width: "10px",
               },
@@ -59,12 +59,12 @@ const AdminCard = ({ children }) => {
                 background: "#555",
               },
             }}
+            className="bg-gray-800"
           >
+            <Typography variant="h4" color="white" sx={{fontSize:"32px", fontWeight:"bolder"}}>Admin Panel</Typography>
             <NavigationSideBar />
           </CardContent>
-          <CardContent
-            sx={{ width: "70%", height: "80%", overflow: "auto"}}
-          >
+          <CardContent sx={{ width: "70%", height: "80%", overflow: "auto" }}>
             {children}
           </CardContent>
         </Box>
