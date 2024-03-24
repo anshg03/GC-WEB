@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { useRouter } from "next/router";
+import Person4Icon from "@mui/icons-material/Person4";
 
 const fields = ["name", "email", "joiningYear", "branch"];
 
@@ -72,6 +73,13 @@ const Faculties = () => {
     height: "100%",
     width: "100%",
     overflow: "auto",
+    border: "1px solid white",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    borderRadius: "10px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent:"center",
+    alignItems: "center",
     "&::-webkit-scrollbar": {
       width: "10px",
     },
@@ -88,9 +96,33 @@ const Faculties = () => {
 
   return (
     <AdminCard>
+      <Box
+        display={"flex"}
+        flexDirection={"row"}
+        gap={2}
+        alignItems={"center"}
+        mb={5}
+      >
+        <Person4Icon sx={{ fontSize: "30px", color: "blue" }} />
+        <Typography
+          variant="h4"
+          color="white"
+          sx={{ fontSize: "25px", fontWeight: "bolder", color: "blue" }}
+        >
+          Faculty
+        </Typography>
+      </Box>
       {loading ? (
-        <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"100%"}}><CircularProgress /></div>
-        
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+          }}
+        >
+          <CircularProgress />
+        </div>
       ) : (
         <Box
           display="flex"
@@ -98,7 +130,9 @@ const Faculties = () => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Typography variant="h6">All faculties</Typography>
+          <Typography variant="h6" sx={{ color: "black", fontSize: "25px" }}>
+            All faculties
+          </Typography>
           <StyledBox>
             <TableContainer>
               <Table>
@@ -113,7 +147,10 @@ const Faculties = () => {
                 </TableHead>
                 <TableBody>
                   {faculties
-                    .slice((page - 1) * facultiesPerPage, page * facultiesPerPage)
+                    .slice(
+                      (page - 1) * facultiesPerPage,
+                      page * facultiesPerPage
+                    )
                     .map((faculty) => (
                       <TableRow
                         onClick={() => handlefacultyClick(faculty)}
@@ -128,13 +165,12 @@ const Faculties = () => {
                 </TableBody>
               </Table>
             </TableContainer>
+            <Pagination
+              count={Math.ceil(faculties.length / facultiesPerPage)}
+              page={page}
+              onChange={handlePageChange}
+            />
           </StyledBox>
-
-          <Pagination
-            count={Math.ceil(faculties.length / facultiesPerPage)}
-            page={page}
-            onChange={handlePageChange}
-          />
         </Box>
       )}
     </AdminCard>

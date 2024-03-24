@@ -11,9 +11,12 @@ import {
   TableRow,
   Paper,
   CircularProgress,
+  Box,
+  Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import AdminCard from "../../../components/AdminCard";
+import Person4Icon from "@mui/icons-material/Person4";
 
 const UpdateFaculty = () => {
   const router = useRouter();
@@ -73,6 +76,22 @@ const UpdateFaculty = () => {
 
   return (
     <AdminCard>
+      <Box
+        display={"flex"}
+        flexDirection={"row"}
+        gap={2}
+        alignItems={"center"}
+        mb={5}
+      >
+        <Person4Icon sx={{ fontSize: "30px", color: "blue" }} />
+        <Typography
+          variant="h4"
+          color="white"
+          sx={{ fontSize: "25px", fontWeight: "bolder", color: "blue" }}
+        >
+          Faculty
+        </Typography>
+      </Box>
       <Grid container spacing={3}>
         <Grid item xs={6}>
           <TextField
@@ -99,7 +118,14 @@ const UpdateFaculty = () => {
         </Grid>
       </Grid>
       {/* Display the filtered faculties */}
-      <TableContainer component={Paper} sx={{ margin: "5px 0px" }}>
+      <TableContainer
+        sx={{
+          margin: "15px 0px",
+          border: "1px solid white",
+          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          borderRadius: "10px",
+        }}
+      >
         <Table>
           <TableHead>
             <TableRow>
@@ -120,7 +146,7 @@ const UpdateFaculty = () => {
                 <TableRow
                   key={faculty.id}
                   onClick={() => handleRowClick(faculty.id)}
-                  sx={{cursor: "pointer"}}
+                  sx={{ cursor: "pointer" }}
                 >
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{faculty.name}</TableCell>
