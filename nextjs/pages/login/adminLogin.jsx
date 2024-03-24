@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Paper,
@@ -22,32 +22,49 @@ export const textFieldStyle = {
 
 const AdminLogin = () => {
   const router = useRouter();
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [admin, setAdmin] = useState({
+    email: null,
+    password: null
+  })
   const [errors, setErrors] = useState({});
-  const [isLoginSuccessful, setLoginSuccessful] = useState(false);
 
-  if (isLoginSuccessful) {
-    router.push("/admin/home");
-  }
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const newErrors = validate(username, password);
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-    } else {
-      // Here you would typically send the form data to your server, e.g., using fetch or axios
-      console.log(`Logging in with: ${username} and password: ${password}`);
-      setLoginSuccessful(true);
-    }
-  };
+    const newErrors = validate(admin);
+    await fetch("/api/Admin/login", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(admin)
+    }).then(res => res.json())
+    .then(res => {
+      if (res.message === "Login Successful") {
+        localStorage.setItem("adminToken", res.adminToken)
+        router.push("../admin/home")
+      }
+    })
+    // if (Object.keys(newErrors).length > 0) {
+    //   setErrors(newErrors);
+    // } else {
+    //   // Here you would typically send the form data to your server, e.g., using fetch or axios
+    //   console.log(`Logging in with: ${username} and password: ${password}`);
+    //   setLoginSuccessful(true);
+    // }
 
-  const validate = (username, password) => {
+  };
+  const handleChange = (e) => {
+    const {name, value} = e.target
+    setAdmin({
+      ...admin,
+      [name]: value === "" ? null : value
+    })
+  }
+  const validate = (admin) => {
     const newErrors = {};
-    if (!username) newErrors.username = "Username cannot be blank";
-    if (!password) newErrors.password = "Password cannot be blank";
+    if (!admin.email) newErrors.email = "Email cannot be blank";
+    if (!admin.password) newErrors.password = "Password cannot be blank";
     return newErrors;
   };
 
@@ -84,13 +101,14 @@ const AdminLogin = () => {
                 textAlign: "left",
               }}
             >
-              Username:
+              Email:
             </InputLabel>
             <TextField
               id="username"
               variant="outlined"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={admin.email}
+              name="email"
+              onChange={handleChange}
               error={!!errors.username}
               helperText={errors.username}
               sx={textFieldStyle}
@@ -113,8 +131,9 @@ const AdminLogin = () => {
               id="password"
               type="password"
               variant="outlined"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={admin.password}
+              name="password"
+              onChange={handleChange}
               error={!!errors.password}
               helperText={errors.password}
               sx={textFieldStyle}
