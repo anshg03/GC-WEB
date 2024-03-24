@@ -1,133 +1,52 @@
-import React, { useEffect, useState } from "react";
-import AdminCard from "../../../components/AdminCard";
-import {
-  Box,
-  Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Pagination,
-  CircularProgress,
-} from "@mui/material";
-import { styled } from "@mui/system";
+import React from "react";
 import { useRouter } from "next/router";
+import { Box, Card, CardContent, Typography } from "@mui/material";
+import { styled } from "@mui/system";
+import { PersonAdd, Update, Delete, Group } from "@mui/icons-material";
+import AdminCard from "../../../components/AdminCard";
 
-const Student = () => {
-  const [loading, setLoading] = useState(false);
-  const [students, setStudents] = useState([]);
-  const [page, setPage] = useState(1);
-  const studentsPerPage = 4; // Change this to the number of students you want per page
+const cards = [
+  { title: "All Students", icon: <Group />, route: "/admin/student/students" },
+  { title: "Add Student", icon: <PersonAdd />, route: "/admin/student/addstudent" },
+  { title: "Remove Student", icon: <Delete />, route: "/admin/student/removestudent" },
+  { title: "Update Student", icon: <Update />, route: "/admin/student/updatestudent" },
+];
 
+const StyledCard = styled(Card)(({ theme }) => ({
+  cursor: "pointer",
+  margin: theme.spacing(2),
+  width: "40%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const Dashboard = () => {
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchStudents = async () => {
-      setLoading(true);
-      // Dummy data
-      const dummyStudents = [
-        { id: 1, name: "John Doe", rollNo: "001", contactNo: "1234567890" },
-        { id: 2, name: "Jane Doe", rollNo: "002", contactNo: "0987654321" },
-        { id: 1, name: "John Doe", rollNo: "001", contactNo: "1234567890" },
-        { id: 2, name: "Jane Doe", rollNo: "002", contactNo: "0987654321" },
-        { id: 1, name: "John Doe", rollNo: "001", contactNo: "1234567890" },
-        { id: 2, name: "Jane Doe", rollNo: "002", contactNo: "0987654321" },
-        { id: 1, name: "John Doe", rollNo: "001", contactNo: "1234567890" },
-        { id: 2, name: "Lala Doe", rollNo: "002", contactNo: "0987654321" },
-        { id: 1, name: "John Doe", rollNo: "001", contactNo: "1234567890" },
-        { id: 2, name: "Jane Doe", rollNo: "002", contactNo: "0987654321" },
-        { id: 1, name: "John Doe", rollNo: "001", contactNo: "1234567890" },
-        // Add more students as needed
-      ];
-
-      // Simulate an asynchronous operation
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      setStudents(dummyStudents);
-      setLoading(false);
-    };
-
-    fetchStudents();
-  }, []);
-
-  const handleStudentClick = (student) => {
-    router.push(`/admin/student/${student.id}`);
+  const handleCardClick = (route) => {
+    router.push(route);
   };
-
-  const handlePageChange = (event, value) => {
-    setPage(value);
-  };
-
-  const StyledBox = styled(Box)(({ theme }) => ({
-    height: "100%",
-    width: "100%",
-    overflow: "auto",
-    "&::-webkit-scrollbar": {
-      width: "10px",
-    },
-    "&::-webkit-scrollbar-track": {
-      background: "#f1f1f1",
-    },
-    "&::-webkit-scrollbar-thumb": {
-      background: "#888",
-    },
-    "&::-webkit-scrollbar-thumb:hover": {
-      background: "#555",
-    },
-  }));
 
   return (
     <AdminCard>
-      {loading ? (
-        <CircularProgress />
-      ) : (
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          <Typography variant="h6">All Students</Typography>
-          <StyledBox>
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Roll No</TableCell>
-                    <TableCell>Contact No</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {students
-                    .slice((page - 1) * studentsPerPage, page * studentsPerPage)
-                    .map((student) => (
-                      <TableRow
-                        onClick={() => handleStudentClick(student)}
-                        key={student.id}
-                        style={{ cursor: "pointer" }}
-                      >
-                        <TableCell>{student.name}</TableCell>
-                        <TableCell>{student.rollNo}</TableCell>
-                        <TableCell>{student.contactNo}</TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </StyledBox>
-
-          <Pagination
-            count={Math.ceil(students.length / studentsPerPage)}
-            page={page}
-            onChange={handlePageChange}
-          />
-        </Box>
-      )}
+      <Box display="flex" flexWrap="wrap" justifyContent="center" height={"100%"} width={"100%"} alignItems={"center"}>
+        {cards.map((card) => (
+          <StyledCard
+            onClick={() => handleCardClick(card.route)}
+            key={card.title}
+          >
+            <CardContent>
+              {card.icon}
+              <Typography variant="h6">{card.title}</Typography>
+            </CardContent>
+          </StyledCard>
+        ))}
+      </Box>
     </AdminCard>
   );
 };
 
-export default Student;
+export default Dashboard;
+
