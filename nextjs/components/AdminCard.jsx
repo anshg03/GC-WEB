@@ -30,7 +30,7 @@ const AdminCard = ({ children }) => {
     >
       <Card
         sx={{
-          width: "80%",
+          width: "90%",
           height: "90%",
           display: "flex",
           flexDirection: "column",
@@ -70,6 +70,24 @@ const AdminCard = ({ children }) => {
               Admin Panel
             </Typography>
             <NavigationSideBar />
+            <Button
+              variant="outlined"
+              color="primary"
+              sx={{
+                m: 1,
+                ml: 2,
+                color: "red",
+                borderColor: "red",
+                "&:hover": {
+                  color: "white",
+                  borderColor: "red",
+                  bgcolor: "red",
+                },
+              }}
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
           </CardContent>
           <CardContent sx={{ width: "70%", height: "100%", overflow: "auto" }}>
             {children}
