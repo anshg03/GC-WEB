@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Adminlayout from "../components/adminlayout"
+import Adminlayout from "../../components/adminlayout"
 
 function AddBranchComponent() {
     const [branchCode, setBranchCode] = useState('');

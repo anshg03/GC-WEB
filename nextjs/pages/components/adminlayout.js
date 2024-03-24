@@ -6,9 +6,10 @@ import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import ChecklistIcon from '@mui/icons-material/Checklist';
-import EditNoteIcon from '@mui/icons-material/EditNote';
+import DescriptionIcon from '@mui/icons-material/Description';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
-function Facultylayout({children}) {
+function Adminlayout({children}) {
   const router = useRouter();
   const logoutFunction = async() => {
     
@@ -30,12 +31,12 @@ function Facultylayout({children}) {
                 <h1 className="text-white text-[32px] font-bold px-4 mb-4">Admin Portal</h1>
                 <ul className="text-white ">
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/dashboard" ><div className='py-2 '><HomeIcon className='pb-1'/> Dashboard</div></Link> </li>
-                  <li className="my-2  px-4 hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/profile" ><div className='py-2'><PersonIcon className='pb-1'/> Student</div></Link> </li>
-                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href='/admin/assignments' ><div className='py-2'><AddIcon/> Courses</div></Link></li>
-                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href='/admin/assignments' ><div className='py-2'><AddIcon/> Attendance Record</div></Link></li>
-                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/grades" ><div className='py-2'><CreditScoreIcon className='pb-1'/> Grading</div></Link> </li>
-                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer">  <Link href="/admin/attendance" ><div className='py-2'><ChecklistIcon className='pb-1'/> Feedback Analysis</div></Link></li>
-                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer">  <Link href="/admin/updateprofile" ><div className='py-2'><EditNoteIcon /> Add Branch</div></Link></li>
+                  <li className="my-2  px-4 hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/students" ><div className='py-2'><PersonIcon className='pb-1'/> Students</div></Link> </li>
+                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href='/admin/courses' ><div className='py-2'><AutoStoriesIcon className='pb-1'/> Courses</div></Link></li>
+                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href='/admin/attendancerecord' ><div className='py-2'><DescriptionIcon className='pb-1'/> Attendance Record</div></Link></li>
+                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/grading" ><div className='py-2'><CreditScoreIcon className='pb-1'/> Grading</div></Link> </li>
+                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer">  <Link href="/admin/feedbackanalysis" ><div className='py-2'><ChecklistIcon className='pb-1'/> Feedback Analysis</div></Link></li>
+                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer">  <Link href="/admin/addbranch" ><div className='py-2'><AddIcon /> Add Branch</div></Link></li>
                 </ul>
               </div>
               {/* Sidebar footer */}
@@ -63,4 +64,4 @@ function Facultylayout({children}) {
   )
 }
 
-export default Facultylayout
+export default Adminlayout

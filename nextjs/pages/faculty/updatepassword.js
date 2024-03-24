@@ -32,10 +32,10 @@ function UpdatePasswordBody() {
         <div className="max-w-md mx-auto mt-8 ">
             <h2 className="text-3xl text-blue-600 font-bold mb-4">Update Password</h2>
             <form onSubmit={handleFormSubmit}>
-                <div className="mb-4">
+                {/* <div className="mb-4">
                     <label htmlFor="oldPassword" className="block mb-1 font-semibold">Old Password:</label>
                     <input type="text" id="oldPassword" name="oldPassword" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} required className="w-full px-3 py-2 rounded border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200" autoComplete='off' />
-                </div>
+                </div> */}
                 <div className="mb-4">
                     <label htmlFor="newPassword" className="block mb-1 font-semibold">New Password:</label>
                     <input type="text" id="newPassword" name="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required className="w-full px-3 py-2 rounded border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200" autoComplete='off'/>
