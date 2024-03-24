@@ -1,14 +1,14 @@
-import faculty from "../../../models/faculty.js";
-import connectDB from "../../../middleware/mongoose";
+import faculty from "../../../models/faculty";
+import connectDB from "../../../middlewares/mongoose";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 
 const handler = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const existingFaculty = await faculty.findOne({ username });
+    const { email, password } = req.body;
+    const existingFaculty = await faculty.findOne({ email });
     if (!existingFaculty) {
-      return res.status(404).json("FFaculty doesn't exist.");
+      return res.status(404).json("Faculty doesn't exist.");
     }
     const isPasswordCorrect = await bcrypt.compare(
       password,

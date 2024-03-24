@@ -10,6 +10,10 @@ const studentSchema = new Schema({
     required: true,
     unique: true,
   },
+  rollNumber: {
+    type: String,
+    required: true
+  },
   password: {
     type: String,
     required: true,
@@ -24,22 +28,12 @@ const studentSchema = new Schema({
       ref: "subject",
     },
   ],
-  username: {
-    type: String,
-  },
   gender: {
     type: String,
   },
   branch: {
     type: String,
     required: true,
-  },
-  section: {
-    type: String,
-    required: true,
-  },
-  batch: {
-    type: String,
   },
   contactNumber: {
     type: Number,
