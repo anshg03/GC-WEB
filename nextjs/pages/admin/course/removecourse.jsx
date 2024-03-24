@@ -9,14 +9,21 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Pagination,
+  Button,
   CircularProgress,
   Grid,
   TextField,
   MenuItem,
+  Checkbox,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Snackbar,
+  Alert
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { useRouter } from "next/router";
 
 const fields = ["id", "subjectName", "subjectCode", "year", "department"];
 
@@ -40,14 +47,17 @@ const dummycourses = [
 
 const Courses = () => {
   const [loading, setLoading] = useState(false);
-  const [courses, setcourses] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [searchCriteria1, setSearchCriteria1] = useState("department");
   const [searchDetails1, setSearchDetails1] = useState("");
   const [searchCriteria2, setSearchCriteria2] = useState("year");
   const [searchDetails2, setSearchDetails2] = useState("");
   const [filteredCourses, setFilteredCourses] = useState([]);
+  const [selectedCourses, setSelectedCourses] = useState([]);
 
-  const router = useRouter();
+  const [openDialog, setOpenDialog] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchcourses = async () => {
@@ -56,17 +66,13 @@ const Courses = () => {
       // Simulate an asynchronous operation
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      setcourses(dummycourses);
+      setCourses(dummycourses);
       setFilteredCourses(dummycourses);
       setLoading(false);
     };
 
     fetchcourses();
   }, []);
-
-  const handlecourseClick = (course) => {
-    router.push(`/admin/course/${course.id}`);
-  };
 
   const handleCriteriaChange1 = (event) => {
     setSearchCriteria1(event.target.value);
@@ -100,6 +106,50 @@ const Courses = () => {
     courses,
   ]);
 
+  const handleCheckboxChange = (event, id) => {
+    if (event.target.checked) {
+      setSelectedCourses([...selectedCourses, id]);
+    } else {
+      setSelectedCourses(selectedCourses.filter((courseId) => courseId !== id));
+    }
+  };
+
+  const removeSelectedCourses = () => {
+    // Remove selected courses from your data
+    setFilteredCourses(
+      filteredCourses.filter((course) => !selectedCourses.includes(course.id))
+    );
+    setCourses(
+      courses.filter((course) => !selectedCourses.includes(course.id))
+    );
+    setSelectedCourses([]);
+    handleCloseDialog();
+    handleOpenSnackbar();
+  };
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleOpenSnackbar = () => {
+    setOpenSnackbar(true);
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
+
+  
+
   const StyledBox = styled(Box)(({ theme }) => ({
     height: "100%",
     width: "100%",
@@ -120,6 +170,44 @@ const Courses = () => {
 
   return (
     <AdminCard>
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Remove Selected Courses"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to remove the selected courses?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={removeSelectedCourses} color="primary" autoFocus>
+            Remove
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Courses removed successfully
+        </Alert>
+      </Snackbar>
       {loading ? (
         <div
           style={{
@@ -136,7 +224,7 @@ const Courses = () => {
           display="flex"
           flexDirection="column"
           alignItems="center"
-          justifyContent="space-between"
+          justifyContent="center"          
         >
           <Grid container spacing={3}>
             <Grid item xs={6}>
@@ -187,10 +275,11 @@ const Courses = () => {
             </Grid>
           </Grid>
           <StyledBox>
-            <TableContainer>
+            <TableContainer sx={{ margin: "5px 0px" }}>
               <Table>
                 <TableHead>
                   <TableRow>
+                    <TableCell>Remove</TableCell>
                     {fields?.map((field) => (
                       <TableCell>
                         {field?.charAt(0)?.toUpperCase() + field?.slice(1)}
@@ -200,11 +289,15 @@ const Courses = () => {
                 </TableHead>
                 <TableBody>
                   {filteredCourses.map((course) => (
-                    <TableRow
-                      onClick={() => handlecourseClick(course)}
-                      key={course.id}
-                      style={{ cursor: "pointer" }}
-                    >
+                    <TableRow key={course.id} style={{ cursor: "pointer" }}>
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          checked={selectedCourses.includes(course.id)}
+                          onChange={(event) =>
+                            handleCheckboxChange(event, course.id)
+                          }
+                        />
+                      </TableCell>
                       {fields.map((field) => (
                         <TableCell>{course[field]}</TableCell>
                       ))}
@@ -213,6 +306,14 @@ const Courses = () => {
                 </TableBody>
               </Table>
             </TableContainer>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={handleOpenDialog}
+              disabled={selectedCourses.length === 0}
+            >
+              Remove
+            </Button>
           </StyledBox>
         </Box>
       )}

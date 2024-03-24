@@ -66,16 +66,13 @@ const CustomDatePicker = ({ id, name, value, onChange, error, helperText }) => {
 
 const AddStudent = () => {
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-    joiningYear: "",
-    username: "",
-    gender: "",
-    branch: "",
-    designation: "",
-    contactNo: "",
-    dob: null,
+    subjectName: "",
+    subjectCode: "",
+    department: "",
+    totalLectures: "",
+    year: 1,
+    instructorName: "",
+    credits: 1,
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -88,13 +85,6 @@ const AddStudent = () => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleDateChange = (date) => {
-    setForm({
-      ...form,
-      dob: date,
     });
   };
 
@@ -202,15 +192,13 @@ const AddStudent = () => {
                         backgroundColor: "#000080",
                         color: "white",
                         height: "80%",
-                        width: "50%",
+                        width: "80%",
                         borderRadius: "7px",
                       }}
                     >
                       {field.charAt(0).toUpperCase() + field.slice(1)}:
                     </InputLabel>
-                    {field === "joiningYear" ||
-                    field === "branch" ||
-                    field === "section" ? (
+                    {field === "year" || field === "instructorName" ? (
                       <FormControl fullWidth>
                         <Select
                           id={field}
@@ -220,27 +208,22 @@ const AddStudent = () => {
                           error={!!errors[field]}
                           style={{ height: "70%" }}
                         >
-                          {/* Replace this array with your actual data */}
-                          {["Option 1", "Option 2", "Option 3"].map(
-                            (option, index) => (
+                          {field === "year" &&
+                            [1, 2, 3, 4].map((option, index) => (
                               <MenuItem key={index} value={option}>
                                 {option}
                               </MenuItem>
-                            )
-                          )}
+                            ))}
+                          {field === "instructorName" &&
+                            ["Option 1", "Option 2", "Option 3"].map(
+                              (option, index) => (
+                                <MenuItem key={index} value={option}>
+                                  {option}
+                                </MenuItem>
+                              )
+                            )}
                         </Select>
                       </FormControl>
-                    ) : field === "dob" ? (
-                      <Box width={"50%"}>
-                        <CustomDatePicker
-                          id={field}
-                          name={field}
-                          value={value}
-                          onChange={handleChange}
-                          error={!!errors[field]}
-                          helperText={errors[field]}
-                        />
-                      </Box>
                     ) : (
                       <TextField
                         fullWidth
@@ -251,6 +234,11 @@ const AddStudent = () => {
                         error={!!errors[field]}
                         helperText={errors[field]}
                         sx={{ ...textFieldStyle, width: "100%" }}
+                        type={
+                          field === "credits" || field === "year"
+                            ? "number"
+                            : "text"
+                        }
                       />
                     )}
                   </Grid>
@@ -260,7 +248,18 @@ const AddStudent = () => {
           })}
         </Grid>
         <hr style={{ visibility: "hidden" }} />
-        <Button variant="contained" color="primary" onClick={handleAddClick}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleAddClick}
+          disabled={
+            !form?.subjectCode ||
+            !form?.subjectName ||
+            !form?.department ||
+            !form?.year ||
+            !form?.credits
+          }
+        >
           Add
         </Button>
       </Box>
