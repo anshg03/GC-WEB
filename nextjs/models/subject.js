@@ -9,6 +9,7 @@ const subjectSchema = new Schema({
   subjectCode: {
     type: String,
     required: true,
+    unique: true
   },
   department: {
     type: String,
