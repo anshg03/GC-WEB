@@ -6,7 +6,8 @@ import {
   Button,
   Box,
   Avatar,
-  IconButton, Typography,
+  IconButton,
+  Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import NavigationSideBar from "./Nav/navigationSideBar";
@@ -45,7 +46,7 @@ const AdminCard = ({ children }) => {
               width: "25%",
               height: "100%",
               overflow: "auto",
-              pt:5,
+              pt: 5,
               "&::-webkit-scrollbar": {
                 width: "10px",
               },
@@ -61,10 +62,16 @@ const AdminCard = ({ children }) => {
             }}
             className="bg-gray-800"
           >
-            <Typography variant="h4" color="white" sx={{fontSize:"32px", fontWeight:"bolder"}}>Admin Panel</Typography>
+            <Typography
+              variant="h4"
+              color="white"
+              sx={{ fontSize: "32px", fontWeight: "bolder" }}
+            >
+              Admin Panel
+            </Typography>
             <NavigationSideBar />
           </CardContent>
-          <CardContent sx={{ width: "70%", height: "80%", overflow: "auto" }}>
+          <CardContent sx={{ width: "70%", height: "100%", overflow: "auto" }}>
             {children}
           </CardContent>
         </Box>

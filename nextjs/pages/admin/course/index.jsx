@@ -27,6 +27,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   cursor: "pointer",
   margin: theme.spacing(2),
   width: "40%",
+  height: "30%",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",

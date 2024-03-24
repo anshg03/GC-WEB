@@ -17,11 +17,13 @@ import {
   InputLabel,
   Grid,
   FormLabel,
+  Typography,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { DatePicker } from "@mui/lab";
 import AdminCard from "../../../components/AdminCard";
 import { textFieldStyle } from "../../login/adminLogin";
+import SchoolIcon from "@mui/icons-material/School";
 
 const CustomDatePicker = ({ id, name, value, onChange, error, helperText }) => {
   return (
@@ -110,16 +112,17 @@ const AddStudent = () => {
   };
 
   const handleAddClick = async () => {
-    console.log(form)
+    console.log(form);
     await fetch("../../api/Admin/addStudent", {
-      method:"POST",
+      method: "POST",
       mode: "cors",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(form)
-    }).then(res=>res.json())
-    .then(res => console.log(res))
+      body: JSON.stringify(form),
+    })
+      .then((res) => res.json())
+      .then((res) => console.log(res));
     // if (validateForm()) {
     //   setOpen(true);
     // }
@@ -186,6 +189,22 @@ const AddStudent = () => {
         </DialogActions>
       </Dialog>
       <Box component="form" noValidate autoComplete="off" height={"100%"}>
+        <Box
+          display={"flex"}
+          flexDirection={"row"}
+          gap={1}
+          alignItems={"center"}
+          mb={5}
+        >
+          <SchoolIcon sx={{ color: "blue" }} />
+          <Typography
+            variant="h4"
+            color="white"
+            sx={{ fontSize: "25px", fontWeight: "bolder", color: "blue" }}
+          >
+            Student
+          </Typography>
+        </Box>
         <Grid container spacing={1} width={"100%"}>
           {Object.entries(form).map(([field, value], index) => {
             return (
@@ -216,8 +235,7 @@ const AddStudent = () => {
                     >
                       {field.charAt(0).toUpperCase() + field.slice(1)}:
                     </InputLabel>
-                    {field === "year" ||
-                    field === "branch" ? (
+                    {field === "year" || field === "branch" ? (
                       <FormControl fullWidth>
                         <Select
                           id={field}
@@ -229,14 +247,20 @@ const AddStudent = () => {
                         >
                           {/* Replace this array with your actual data */}
                           {(field == "branch"
-                           ? ["Computer Science Engineering", "Electronics and Communication Engineering", "Electrical Engineering", "Mechanical Engineering", "Civil Engineering", "Metallurgy"]
-                           : ["2019", "2020", "2021", "2022", "2023", "2024"]).map(
-                            (option, index) => (
-                              <MenuItem key={index} value={option}>
-                                {option}
-                              </MenuItem>
-                            )
-                          )}
+                            ? [
+                                "Computer Science Engineering",
+                                "Electronics and Communication Engineering",
+                                "Electrical Engineering",
+                                "Mechanical Engineering",
+                                "Civil Engineering",
+                                "Metallurgy",
+                              ]
+                            : ["2019", "2020", "2021", "2022", "2023", "2024"]
+                          ).map((option, index) => (
+                            <MenuItem key={index} value={option}>
+                              {option}
+                            </MenuItem>
+                          ))}
                         </Select>
                       </FormControl>
                     ) : field === "dob" ? (

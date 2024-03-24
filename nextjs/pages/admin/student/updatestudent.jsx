@@ -11,9 +11,12 @@ import {
   TableRow,
   Paper,
   CircularProgress,
+  Box,
+  Typography
 } from "@mui/material";
 import { useRouter } from "next/router";
 import AdminCard from "../../../components/AdminCard";
+import SchoolIcon from '@mui/icons-material/School';
 
 const UpdateStudent = () => {
   const router = useRouter();
@@ -73,6 +76,16 @@ const UpdateStudent = () => {
 
   return (
     <AdminCard>
+    <Box display={"flex"} flexDirection={"row"} gap={2} alignItems={"center"} mb={5}>
+        <SchoolIcon sx={{ fontSize: "30px", color: "blue" }} />
+        <Typography
+          variant="h4"
+          color="white"
+          sx={{ fontSize: "25px", fontWeight: "bolder", color: "blue" }}
+        >
+          Student
+        </Typography>
+      </Box>
       <Grid container spacing={3}>
         <Grid item xs={6}>
           <TextField
@@ -99,7 +112,12 @@ const UpdateStudent = () => {
         </Grid>
       </Grid>
       {/* Display the filtered students */}
-      <TableContainer component={Paper} sx={{ margin: "5px 0px" }}>
+      <TableContainer sx={{
+          margin: "15px 0px",
+          border: "1px solid white",
+          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          borderRadius: "10px",
+        }}>
         <Table>
           <TableHead>
             <TableRow>

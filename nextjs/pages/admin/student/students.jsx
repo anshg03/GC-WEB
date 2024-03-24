@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { useRouter } from "next/router";
+import SchoolIcon from "@mui/icons-material/School";
 
 const fields = ["name", "email", "year", "branch"];
 
@@ -72,6 +73,13 @@ const Students = () => {
     height: "100%",
     width: "100%",
     overflow: "auto",
+    border: "1px solid white",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    borderRadius: "10px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent:"center",
+    alignItems: "center",
     "&::-webkit-scrollbar": {
       width: "10px",
     },
@@ -88,54 +96,73 @@ const Students = () => {
 
   return (
     <AdminCard>
-      {loading ? (
-        <CircularProgress />
-      ) : (
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="space-between"
+      <Box display={"flex"} flexDirection={"row"} gap={2} alignItems={"center"}>
+        <SchoolIcon sx={{ fontSize: "30px", color: "blue" }} />
+        <Typography
+          variant="h4"
+          color="white"
+          sx={{ fontSize: "25px", fontWeight: "bolder", color: "blue" }}
         >
-          <Typography variant="h6">All Students</Typography>
-          <StyledBox>
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    {fields?.map((field) => (
-                      <TableCell>
-                        {field?.charAt(0)?.toUpperCase() + field?.slice(1)}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {students
-                    .slice((page - 1) * studentsPerPage, page * studentsPerPage)
-                    .map((student) => (
-                      <TableRow
-                        onClick={() => handleStudentClick(student)}
-                        key={student.id}
-                        style={{ cursor: "pointer" }}
-                      >
-                        {fields.map((field) => (
-                          <TableCell>{student[field]}</TableCell>
-                        ))}
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </StyledBox>
-
-          <Pagination
-            count={Math.ceil(students.length / studentsPerPage)}
-            page={page}
-            onChange={handlePageChange}
-          />
-        </Box>
-      )}
+          Student
+        </Typography>
+      </Box>
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <Typography
+              variant="h6"
+              sx={{ fontSize: "20px", fontWeight: "bolder", color: "black", mb:4 }}
+            >
+              All Students
+            </Typography>
+            <StyledBox>
+              <TableContainer>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      {fields?.map((field) => (
+                        <TableCell>
+                          {field?.charAt(0)?.toUpperCase() + field?.slice(1)}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {students
+                      .slice(
+                        (page - 1) * studentsPerPage,
+                        page * studentsPerPage
+                      )
+                      .map((student) => (
+                        <TableRow
+                          onClick={() => handleStudentClick(student)}
+                          key={student.id}
+                          style={{ cursor: "pointer" }}
+                        >
+                          {fields.map((field) => (
+                            <TableCell>{student[field]}</TableCell>
+                          ))}
+                        </TableRow>
+                      ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <Pagination
+                count={Math.ceil(students.length / studentsPerPage)}
+                page={page}
+                onChange={handlePageChange}
+              />
+            </StyledBox>
+          </>
+        )}
+      </Box>
     </AdminCard>
   );
 };

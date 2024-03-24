@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import AdminCard from "../../components/AdminCard";
-import { Box, TextField, Grid, InputLabel } from "@mui/material";
+import { Box, TextField, Grid, InputLabel, Typography } from "@mui/material";
 import { textFieldStyle } from "../../pages/login/adminLogin";
+import  HomeIcon  from "@mui/icons-material/Home";
 
 const Home = () => {
   const [data, setData] = useState({
@@ -37,69 +38,62 @@ const Home = () => {
   return (
     <AdminCard>
       <Box>
-        {data && (
-          <Grid container spacing={2}>
-            {fields.map((field) => (
-              <Grid
-                item
-                xs={6}
-                display={"flex"}
-                flexDirection={"row"}
-                width={"100%"}
-                justifyContent={"space-between"}
-              >
-                <InputLabel
-                  htmlFor={field.name}
-                  sx={{
-                    fontWeight: "bold",
-                    padding: 1,
-                    display: "block",
-                    textAlign: "center",
-                    backgroundColor: "#000080",
-                    color:"white",
-                    height:"80%",
-                    width:"45%",
-                    borderRadius:"7px",
-                  }}
-                >
-                  {field.label}:
-                </InputLabel>
-                <TextField
-                  id={field.name}
-                  type="text"
-                  variant="outlined"
-                  value={data[field.name]}
-                  fullWidth
-                  sx={{ ...textFieldStyle, width: "50%" }}
-                />
-              </Grid>
-            ))}
-
-            {/* <Grid item xs={6}>
-              <TextField label="Email" value={data.email} fullWidth />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField label="DOB" value={data.dob} fullWidth />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField label="Username" value={data.username} fullWidth />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField label="Department" value={data.department} fullWidth />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField label="Contact No" value={data.contactno} fullWidth />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                label="Joining Year"
-                value={data.joiningyr}
-                fullWidth
-              />
-            </Grid> */}
-          </Grid>
-        )}
+        <Box
+          display={"flex"}
+          flexDirection={"row"}
+          gap={2}
+          alignItems={"center"}
+          mb={5}
+        >
+          <HomeIcon sx={{fontSize: "30px", color: "blue" }} />
+          <Typography
+            variant="h4"
+            color="white"
+            sx={{ fontSize: "25px", fontWeight: "bolder", color: "blue" }}
+          >
+            Dashboard
+          </Typography>{" "}
+        </Box>
       </Box>
+      {data && (
+        <Grid container spacing={2}>
+          {fields.map((field) => (
+            <Grid
+              item
+              xs={6}
+              display={"flex"}
+              flexDirection={"row"}
+              width={"100%"}
+              justifyContent={"space-between"}
+            >
+              <InputLabel
+                htmlFor={field.name}
+                sx={{
+                  fontWeight: "bold",
+                  padding: 1,
+                  display: "block",
+                  textAlign: "center",
+                  backgroundColor: "#000080",
+                  color: "white",
+                  height: "80%",
+                  width: "45%",
+                  borderRadius: "7px",
+                }}
+              >
+                {field.label}:
+              </InputLabel>
+              <TextField
+                id={field.name}
+                type="text"
+                variant="outlined"
+                value={data[field.name]}
+                fullWidth
+                sx={{ ...textFieldStyle, width: "50%" }}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </AdminCard>
   );
 };

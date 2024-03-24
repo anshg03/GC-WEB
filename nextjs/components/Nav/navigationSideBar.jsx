@@ -10,6 +10,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import SchoolIcon from "@mui/icons-material/School";
 import Person4Icon from "@mui/icons-material/Person4";
 import BookIcon from "@mui/icons-material/Book";
+import ChecklistIcon from '@mui/icons-material/Checklist';
+import CreditScoreIcon from '@mui/icons-material/CreditScore';
+import FeedbackIcon from '@mui/icons-material/Feedback';
+
 
 const NavigationSideBar = () => {
   const NavigationSideBar = [
@@ -20,9 +24,9 @@ const NavigationSideBar = () => {
     { name: "Student", path: "/admin/student", icon: <SchoolIcon /> },
     { name: "Faculty", path: "/admin/faculty", icon: <Person4Icon /> },
     { name: "Courses", path: "/admin/course", icon: <BookIcon /> },
-    { name: "Attendance records", path: "/", icon: <BookIcon /> },
-    { name: "Grading", path: "/", icon: <BookIcon /> },
-    { name: "Feedback analysis", path: "/", icon: <BookIcon /> },
+    { name: "Attendance records", path: "/admin/attendance", icon: <ChecklistIcon /> },
+    { name: "Grading", path: "/admin/grades", icon: <CreditScoreIcon /> },
+    { name: "Feedback analysis", path: "/admin/feedbacks", icon: <FeedbackIcon /> },
   ];
 
   return (
