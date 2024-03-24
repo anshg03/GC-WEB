@@ -9,6 +9,9 @@ import {
   Box,
 } from "@mui/material";
 import { useRouter } from "next/router";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
 export const textFieldStyle = {
   marginBottom: "10px",
@@ -23,49 +26,50 @@ export const textFieldStyle = {
 const AdminLogin = () => {
   const router = useRouter();
   const [admin, setAdmin] = useState({
-    email: null,
-    password: null
-  })
-  const [errors, setErrors] = useState({});
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const newErrors = validate(admin);
-    await fetch("/api/Admin/login", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(admin)
-    }).then(res => res.json())
-    .then(res => {
-      if (res.message === "Login Successful") {
-        localStorage.setItem("adminToken", res.adminToken)
-        router.push("../admin/home")
-      }
-    })
-    // if (Object.keys(newErrors).length > 0) {
-    //   setErrors(newErrors);
-    // } else {
-    //   // Here you would typically send the form data to your server, e.g., using fetch or axios
-    //   console.log(`Logging in with: ${username} and password: ${password}`);
-    //   setLoginSuccessful(true);
-    // }
+    const newError = validate(admin);
 
+    if (newError?.length > 0) {
+      setError(newError);
+    } else {
+      // Here you would typically send the form data to your server, e.g., using fetch or axios
+      await fetch("../api/Admin/login", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(admin),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.message === "Login Successful") {
+            localStorage.setItem("adminToken", res.adminToken);
+            router.push("../admin/home");
+          }
+        });
+      setLoginSuccessful(true);
+    }
   };
   const handleChange = (e) => {
-    const {name, value} = e.target
+    const { name, value } = e.target;
     setAdmin({
       ...admin,
-      [name]: value === "" ? null : value
-    })
-  }
+      [name]: value,
+    });
+  };
   const validate = (admin) => {
-    const newErrors = {};
-    if (!admin.email) newErrors.email = "Email cannot be blank";
-    if (!admin.password) newErrors.password = "Password cannot be blank";
-    return newErrors;
+    let newError = "";
+    if (!admin.email && !admin.password)
+      newError = "Email and Password cannot be blank";
+    return newError;
   };
 
   return (
@@ -84,71 +88,72 @@ const AdminLogin = () => {
           maxWidth: "400px",
           padding: "20px",
           textAlign: "center",
-          // backgroundColor: "#f0f0f0",
+          bgcolor: "rgb(209 213 219)",
         }}
       >
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h4" gutterBottom fontWeight={"bolder"}>
           Admin
         </Typography>
-        <form onSubmit={handleSubmit}>
-          <Box>
-            <InputLabel
-              htmlFor="username"
-              sx={{
-                fontWeight: "bold",
-                marginBottom: "5px",
-                display: "block",
-                textAlign: "left",
-              }}
-            >
-              Email:
-            </InputLabel>
-            <TextField
-              id="username"
-              variant="outlined"
-              value={admin.email}
-              name="email"
-              onChange={handleChange}
-              error={!!errors.username}
-              helperText={errors.username}
-              sx={textFieldStyle}
-              // required
-            />
-          </Box>
-          <Box>
-            <InputLabel
-              htmlFor="password"
-              sx={{
-                fontWeight: "bold",
-                marginBottom: "5px",
-                display: "block",
-                textAlign: "left",
-              }}
-            >
-              Password:
-            </InputLabel>
-            <TextField
-              id="password"
-              type="password"
-              variant="outlined"
-              value={admin.password}
-              name="password"
-              onChange={handleChange}
-              error={!!errors.password}
-              helperText={errors.password}
-              sx={textFieldStyle}
-              // required
-            />
-          </Box>
+        <AdminPanelSettingsIcon sx={{ fontSize: "10em" }} />
 
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            sx={{ width: "30%", borderRadius: 4 }}
-          >
-            Login
-          </Button>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+              <label htmlFor="email" className="sr-only">
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="text"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Email"
+                value={admin.email}
+                onChange={handleChange}
+                autoComplete="off"
+              />
+            </div>
+            <div className="relative">
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
+              <input
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500  sm:text-sm"
+                placeholder="Password"
+                value={admin.password}
+                onChange={handleChange}
+              />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <span>
+                    <FaEye />
+                  </span>
+                ) : (
+                  <span>
+                    <FaEyeSlash />
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
+          {error && <p className="mt-2 text-red-600">{error}</p>}
+          <div>
+            <button
+              type="submit"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Sign in
+            </button>
+          </div>
         </form>
       </Paper>
     </Container>
