@@ -1,5 +1,5 @@
 import feedback from "../../../models/feedback";
-import connectDB from "../../../Middlewares/mongoose";
+import connectDB from "../../../middlewares/mongoose";
 
 const handler = async (req, res) => {
     const {instructorEmail} = req.body

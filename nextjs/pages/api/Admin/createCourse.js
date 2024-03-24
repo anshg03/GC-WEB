@@ -1,5 +1,5 @@
 import subject from "../../../models/subject";
-import connectDB from "../../../Middlewares/mongoose";
+import connectDB from "../../../middlewares/mongoose";
 import student from "../../../models/student";
 const handler = async (req, res) => {
   try {
