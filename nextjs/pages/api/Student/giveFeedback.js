@@ -1,5 +1,5 @@
 import feedback from "../../../models/feedback";
-import connectDB from "../../../Middlewares/mongoose";
+import connectDB from "../../../middlewares/mongoose";
 import bcrypt from "bcrypt"
 
 const handler = async (req, res) => {

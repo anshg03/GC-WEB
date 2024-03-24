@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt"
-import connectDB from "../../../Middlewares/mongoose"
+import connectDB from "../../../middlewares/mongoose"
 import admin from "../../../models/admin"
 import dotenv from "dotenv"
 dotenv.config({path: "../../../.env.local"})
