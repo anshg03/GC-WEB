@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const testSchema = mongoose.Schema({
-  test: {
+  tests: {
     type: String,
     required: true,
     trim: true,
