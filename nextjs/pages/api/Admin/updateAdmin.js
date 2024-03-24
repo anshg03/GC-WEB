@@ -3,7 +3,7 @@ import connectDB from "../../../middlewares/mongoose";
 
 const handler = async (req, res) => {
     try {
-        const { name, dob, department, contactNumber, avatar, email } = req.body;
+        const { name, contactNumber, email } = req.body;
         const updatedAdmin = await admin.findOne({ email });
         if (!updatedAdmin) {
             return res.status(404).json({
@@ -12,10 +12,7 @@ const handler = async (req, res) => {
             })
         }
         updatedAdmin.name = name;
-        updatedAdmin.dob = dob;
-        updatedAdmin.department = department;
         updatedAdmin.contactNumber = contactNumber;
-        updatedAdmin.avatar = avatar;
         await updatedAdmin.save()
         res.status(200).json({
             response: updatedAdmin,

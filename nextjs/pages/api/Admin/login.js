@@ -1,12 +1,11 @@
 import bcrypt from "bcrypt"
 import connectDB from "../../../middlewares/mongoose"
 import admin from "../../../models/admin"
-import dotenv from "dotenv"
-dotenv.config({path: "../../../.env.local"})
+import jwt from"jsonwebtoken"
 
 const handler = async (req, res) => {
-    const { username, password } = req.body;
-    if (!username || !password) {
+    const { email, password } = req.body;
+    if (!email || !password) {
         console.log("Enter valid details")
         res.status(400).json({
             success: false,
@@ -14,20 +13,29 @@ const handler = async (req, res) => {
         })
     }
     try {
-        const existingAdmin = await admin.findOne({ username });
+        const existingAdmin = await admin.findOne({ email: email });
         if (!existingAdmin) {
-            errors.usernameError = "Admin doesn't exist.";
-            return res.status(404).json(errors);
+            // errors.emailError = "Admin doesn't exist.";
+            return res.status(404).json({
+                message: "Admin doesn't exist",
+                success: false
+            });
         }
-        const isPasswordCorrect = await bcrypt.compare(
-            password,
-            existingAdmin.password
-        );
+        // const hashPassword = await bcrypt.hash(password, 10)
+        // const isPasswordCorrect = await bcrypt.compare(
+        //     hashPassword,
+        //     existingAdmin.password
+        // );
+        const isPasswordCorrect = existingAdmin.password === password
+        console.log(isPasswordCorrect)
         if (!isPasswordCorrect) {
-            errors.passwordError = "Invalid Credentials";
-            return res.status(404).json(errors);
+            // errors.passwordError = "Invalid Credentials";
+            return res.status(401).json({
+                message: "Incorrect Password",
+                success: false
+            });
         }
-    
+        
         const token = jwt.sign(
             {
             email: existingAdmin.email,

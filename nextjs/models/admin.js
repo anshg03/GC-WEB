@@ -14,18 +14,6 @@ const adminSchema = mongoose.Schema(
     password: {
       type: String,
     },
-    username: {
-      type: String,
-    },
-    department: {
-      type: String,
-    },
-    dob: {
-      type: String,
-    },
-    joiningYear: {
-      type: String,
-    },
     contactNumber: {
       type: Number,
     },
