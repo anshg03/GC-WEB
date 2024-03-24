@@ -16,4 +16,10 @@ const marksSchema = new Schema({
   },
 });
 
-export default mongoose.model("Marks", marksSchema);
+let marksModel
+if (!mongoose.models.marks)
+ marksModel = mongoose.model("marks", marksSchema);
+
+console.log(mongoose.models.marks)
+
+export default  mongoose.models.marks || marksModel;

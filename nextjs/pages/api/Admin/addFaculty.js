@@ -1,9 +1,9 @@
 import student from "../../../models/student.js";
-import connectDB from "../../../middleware/mongoose";
+import connectDB from "../../../middlewares/mongoose.js";
 import faculty from "../../../models/faculty.js";
 import branch from "../../../models/branch.js";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 
 const handler = async (req, res) => {
   try {
