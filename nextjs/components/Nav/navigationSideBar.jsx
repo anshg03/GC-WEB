@@ -23,7 +23,7 @@ const NavigationSideBar = () => {
     // { name: "Delete Admin", path: "/" },
     { name: "Student", path: "/admin/student", icon: <SchoolIcon /> },
     { name: "Faculty", path: "/admin/faculty", icon: <Person4Icon /> },
-    { name: "Courses", path: "/admin/course", icon: <BookIcon /> },
+    { name: "Course", path: "/admin/course", icon: <BookIcon /> },
     { name: "Attendance records", path: "/admin/attendance", icon: <ChecklistIcon /> },
     { name: "Grading", path: "/admin/grades", icon: <CreditScoreIcon /> },
     { name: "Feedback analysis", path: "/admin/feedbacks", icon: <FeedbackIcon /> },
