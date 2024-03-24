@@ -17,7 +17,7 @@ import {
   InputLabel,
   Grid,
   FormLabel,
-  Typography
+  Typography,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { DatePicker } from "@mui/lab";
@@ -180,14 +180,14 @@ const AddStudent = () => {
         </DialogActions>
       </Dialog>
       <Box component="form" noValidate autoComplete="off" height={"100%"}>
-      <Box
+        <Box
           display={"flex"}
           flexDirection={"row"}
           gap={1}
           alignItems={"center"}
           mb={5}
         >
-          <Person4Icon sx={{ sx:"30px", color: "blue" }} />
+          <Person4Icon sx={{ sx: "30px", color: "blue" }} />
           <Typography
             variant="h4"
             color="white"

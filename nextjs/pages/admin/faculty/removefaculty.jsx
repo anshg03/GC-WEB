@@ -21,7 +21,7 @@ import {
   Alert,
   CircularProgress,
   Box,
-  Typography
+  Typography,
 } from "@mui/material";
 import AdminCard from "../../../components/AdminCard";
 import Person4Icon from "@mui/icons-material/Person4";
@@ -71,7 +71,7 @@ const Removefaculty = () => {
       });
     };
     const fetchData = async () => {
-        setIsLoading(true);
+      setIsLoading(true);
       const data = await fetchFaculties();
       setFaculties(data);
       setFilteredFaculties(data);
@@ -163,7 +163,13 @@ const Removefaculty = () => {
           Faculties removed successfully
         </Alert>
       </Snackbar>
-      <Box display={"flex"} flexDirection={"row"} gap={2} alignItems={"center"} mb={5}>
+      <Box
+        display={"flex"}
+        flexDirection={"row"}
+        gap={2}
+        alignItems={"center"}
+        mb={5}
+      >
         <Person4Icon sx={{ fontSize: "30px", color: "blue" }} />
         <Typography
           variant="h4"
@@ -199,12 +205,14 @@ const Removefaculty = () => {
         </Grid>
       </Grid>
       {/* Display the filtered faculties */}
-      <TableContainer sx={{
+      <TableContainer
+        sx={{
           margin: "15px 0px",
           border: "1px solid white",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           borderRadius: "10px",
-        }}>
+        }}
+      >
         <Table>
           <TableHead>
             <TableRow>

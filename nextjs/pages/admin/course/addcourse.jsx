@@ -17,11 +17,13 @@ import {
   InputLabel,
   Grid,
   FormLabel,
+  Typography
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { DatePicker } from "@mui/lab";
 import AdminCard from "../../../components/AdminCard";
 import { textFieldStyle } from "../../login/adminLogin";
+import BookIcon from "@mui/icons-material/Book";
 
 const CustomDatePicker = ({ id, name, value, onChange, error, helperText }) => {
   return (
@@ -168,6 +170,22 @@ const AddStudent = () => {
         </DialogActions>
       </Dialog>
       <Box component="form" noValidate autoComplete="off" height={"100%"}>
+      <Box
+          display={"flex"}
+          flexDirection={"row"}
+          gap={1}
+          alignItems={"center"}
+          mb={6}
+        >
+          <BookIcon sx={{ sx:"30px", color: "blue" }} />
+          <Typography
+            variant="h4"
+            color="white"
+            sx={{ fontSize: "25px", fontWeight: "bolder", color: "blue" }}
+          >
+            Course
+          </Typography>
+        </Box>
         <Grid container spacing={1} width={"100%"}>
           {Object.entries(form).map(([field, value], index) => {
             return (

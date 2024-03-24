@@ -21,9 +21,10 @@ import {
   DialogContentText,
   DialogActions,
   Snackbar,
-  Alert
+  Alert,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import BookIcon from "@mui/icons-material/Book";
 
 const fields = ["id", "subjectName", "subjectCode", "year", "department"];
 
@@ -147,9 +148,6 @@ const Courses = () => {
     setOpenSnackbar(false);
   };
 
-
-  
-
   const StyledBox = styled(Box)(({ theme }) => ({
     height: "100%",
     width: "100%",
@@ -208,6 +206,22 @@ const Courses = () => {
           Courses removed successfully
         </Alert>
       </Snackbar>
+      <Box
+        display={"flex"}
+        flexDirection={"row"}
+        gap={2}
+        alignItems={"center"}
+        mb={5}
+      >
+        <BookIcon sx={{ fontSize: "30px", color: "blue" }} />
+        <Typography
+          variant="h4"
+          color="white"
+          sx={{ fontSize: "25px", fontWeight: "bolder", color: "blue" }}
+        >
+          Course
+        </Typography>
+      </Box>
       {loading ? (
         <div
           style={{
@@ -224,7 +238,7 @@ const Courses = () => {
           display="flex"
           flexDirection="column"
           alignItems="center"
-          justifyContent="center"          
+          justifyContent="center"
         >
           <Grid container spacing={3}>
             <Grid item xs={6}>
@@ -275,7 +289,14 @@ const Courses = () => {
             </Grid>
           </Grid>
           <StyledBox>
-            <TableContainer sx={{ margin: "5px 0px" }}>
+            <TableContainer
+              sx={{
+                margin: "15px 0px",
+                border: "1px solid white",
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                borderRadius: "10px",
+              }}
+            >
               <Table>
                 <TableHead>
                   <TableRow>

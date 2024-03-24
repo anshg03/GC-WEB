@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { useRouter } from "next/router";
+import BookIcon from "@mui/icons-material/Book";
 
 const fields = ["id", "subjectName", "subjectCode", "year", "department"];
 
@@ -104,6 +105,13 @@ const Courses = () => {
     height: "100%",
     width: "100%",
     overflow: "auto",
+    border: "1px solid white",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    borderRadius: "10px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
     "&::-webkit-scrollbar": {
       width: "10px",
     },
@@ -120,6 +128,22 @@ const Courses = () => {
 
   return (
     <AdminCard>
+      <Box
+        display={"flex"}
+        flexDirection={"row"}
+        gap={2}
+        alignItems={"center"}
+        mb={5}
+      >
+        <BookIcon sx={{ fontSize: "30px", color: "blue" }} />
+        <Typography
+          variant="h4"
+          color="white"
+          sx={{ fontSize: "25px", fontWeight: "bolder", color: "blue" }}
+        >
+          Course
+        </Typography>
+      </Box>
       {loading ? (
         <div
           style={{
@@ -186,7 +210,7 @@ const Courses = () => {
               />
             </Grid>
           </Grid>
-          <StyledBox>
+          <StyledBox mt={2}>
             <TableContainer>
               <Table>
                 <TableHead>
@@ -199,6 +223,13 @@ const Courses = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
+                  {filteredCourses.length === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={5} align="center">
+                        No faculties
+                      </TableCell>
+                    </TableRow>
+                  )}
                   {filteredCourses.map((course) => (
                     <TableRow
                       onClick={() => handlecourseClick(course)}

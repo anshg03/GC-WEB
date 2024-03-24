@@ -4,6 +4,7 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { ListAlt, AddBox, Delete, Edit } from "@mui/icons-material";
 import AdminCard from "../../../components/AdminCard";
+import BookIcon from "@mui/icons-material/Book";
 
 const cards = [
   {
@@ -43,11 +44,21 @@ const Dashboard = () => {
 
   return (
     <AdminCard>
+    <Box display={"flex"} flexDirection={"row"} gap={2} alignItems={"center"}>
+        <BookIcon sx={{ fontSize: "30px", color: "blue" }} />
+        <Typography
+          variant="h4"
+          color="white"
+          sx={{ fontSize: "25px", fontWeight: "bolder", color: "blue" }}
+        >
+          Course
+        </Typography>
+      </Box>
       <Box
         display="flex"
         flexWrap="wrap"
         justifyContent="center"
-        height={"100%"}
+        height={"80%"}
         width={"100%"}
         alignItems={"center"}
       >
