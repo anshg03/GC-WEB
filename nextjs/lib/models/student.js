@@ -28,9 +28,6 @@ const studentSchema = new Schema({
       ref: "subject",
     },
   ],
-  gender: {
-    type: String,
-  },
   branch: {
     type: String,
     required: true,

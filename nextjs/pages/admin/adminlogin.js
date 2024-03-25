@@ -7,24 +7,56 @@ import Link from 'next/link';
 
 const AdminLogin = () => {
   const router = useRouter();
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [admin, setAdmin] = useState({
+    email: "",
+    password: ""
+  })
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError  ] = useState({});
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    // Here you can add your login logic
-    if (email === 'admin' && password === 'password') {
-      // Successful login
-      
-      await router.push("/admin/dashboard");
-      alert("Admin Logged In Successfully")
-
-    } else {
-      setError('Invalid email or password');
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (admin.password.length !== 8 || !admin.email) {
+      alert("Enter all the details")
     }
+    // const newErrors = validate(admin);
+    await fetch("/api/Admin/login", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(admin)
+    }).then(res => res.json())
+    .then(res => {
+      if (res.message === "Login Successful") {
+        localStorage.setItem("adminToken", res.adminToken)
+        router.push("/admin/dashboard")
+      } else {
+        alert("Enter correct credentials")
+      }
+    })
+    // if (Object.keys(newErrors).length > 0) {
+    //   setErrors(newErrors);
+    // } else {
+    //   // Here you would typically send the form data to your server, e.g., using fetch or axios
+    //   console.log(`Logging in with: ${username} and password: ${password}`);
+    //   setLoginSuccessful(true);
+    // }
+
+  };
+  const handleChange = (e) => {
+    const {name, value} = e.target
+    setAdmin({
+      ...admin,
+      [name]: value 
+    })
+  }
+  const validate = (admin) => {
+    const newErrors = {};
+    if (!admin.email) newErrors.email = "Email cannot be blank";
+    if (!admin.password) newErrors.password = "Password cannot be blank";
+    return newErrors;
   };
 
   
@@ -51,8 +83,8 @@ const AdminLogin = () => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email"
-                value={email}
-                onChange={(e)=> setEmail(e.target.value)}
+                value={admin.email}
+                onChange={handleChange}
                 autoComplete='off'
               />
             </div>
@@ -67,8 +99,8 @@ const AdminLogin = () => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500  sm:text-sm"
                 placeholder="Password"
-                value={password}
-                onChange={e=> setPassword(e.target.value)}
+                value={admin.password}
+                onChange={handleChange}
               />
               <button
                 type="button"
@@ -85,10 +117,11 @@ const AdminLogin = () => {
             </div>
 
           </div>
-          {error && <p className="mt-2 text-red-600">{error}</p>}
+          {/* {error && <p className="mt-2 text-red-600">{error}</p>} */}
           <div>
             <button
-              type="submit"
+              type="button"
+              onClick={handleSubmit}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Login

@@ -7,6 +7,7 @@ import subject from "../../../lib/models/subject.js";
 
 const handler = async (req, res) => {
   try {
+    // console.log("bsdkbvj")
     const departments = await branch.find();
     res.status(200).json(departments);
   } catch (error) {
