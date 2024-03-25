@@ -24,7 +24,7 @@ const studentlogin = () => {
   }
 
   const handleSubmit = async (e) => {
-    
+    console.log(student)
     e.preventDefault();
     await fetch("../api/Student/login", {
       method: "POST",

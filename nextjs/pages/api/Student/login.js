@@ -5,11 +5,14 @@ import bcrypt from "bcryptjs";
 
 const handler = async (req, res) => {
   try {
+    console.log(req.body)
     const { email, password } = req.body;
     const existingStudent = await student.findOne({ email: email });
+    console.log(existingStudent)
     if (!existingStudent) {
       return res.status(404).json("Student doesn't exist.");
     }
+    console.log("sdbvhjb")
     // const isPasswordCorrect = await bcrypt.compare(
     //   password,
     //   existingStudent.password

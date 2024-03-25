@@ -9,6 +9,28 @@ function AttendanceBody() {
   const [date, setDate] = useState(new Date());
   const [checkboxList, setCheckboxList] = useState([false]);
   const [selectedStudents, setSelectedStudents] = useState([]);
+  const [branches, setBranches] = useState([]);
+  const [courses,setCourses] = useState([])
+  useEffect(() => {
+    fetchBranch()
+    const fetchCourses = async () => {
+      await fetch("../../api/Admin/getAllSubjects", {
+        method: "GET"
+      }).then(res => res.json())
+      .then(res => {
+        setCourses(res)
+        console.log(res)
+      })
+    }
+    fetchCourses();
+}, [])
+const fetchBranch = async () => {
+  await fetch("../../api/Admin/getAllBranch", {
+    method: "GET",
+    mode: "cors",
+}).then(res => res.json())
+.then(res => setBranches(res))
+}
 
   // Dummy data for demonstration
   const dummyStudents = [
@@ -76,7 +98,7 @@ function AttendanceBody() {
     "Chemistry",
     "Biology",
   ];
-
+  
   const subjectNames = ["OS", "CN", "DBMS"];
 
   const yearStudents = [2020, 2021, 2022, 2023, 2024];
@@ -118,7 +140,7 @@ function AttendanceBody() {
       };
       console.log(requestBody);
       // Send a POST request to the backend API
-      const response = await fetch("/api/Admin/getStudent", {
+      const response = await fetch("/api/Admin/getStudentByBranch", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -185,9 +207,9 @@ function AttendanceBody() {
             className="w-full px-3 py-2 rounded border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200"
           >
             <option value="">Select branch</option>
-            {branchNames.map((branch, index) => (
-              <option key={index} value={branch}>
-                {branch}
+            {branches.map((branch, index) => (
+              <option key={index} value={branch.departmentName}>
+                {branch.departmentName}
               </option>
             ))}
           </select>
@@ -222,9 +244,9 @@ function AttendanceBody() {
             className="w-full px-3 py-2 rounded border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200"
           >
             <option value="">Select Subject</option>
-            {subjectNames.map((branch, index) => (
-              <option key={index} value={branch}>
-                {branch}
+            {courses.map((course, index) => (
+              <option key={index} value={course.subjectName}>
+                {course.subjectName}
               </option>
             ))}
           </select>
