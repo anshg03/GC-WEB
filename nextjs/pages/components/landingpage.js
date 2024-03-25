@@ -6,13 +6,13 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 function Landingpage() {
   return (
-    <div className='flex flex-col min-h-screen bg-[#141415] text-white items-center py-12 px-6 gap-10'>
+    <div className='flex flex-col min-h-screen text-white items-center py-12 px-6 gap-10'>
       <div className='text-5xl font-bold'>Indian Institute of Technology</div>
       <div className='flex gap-10'>
 
       <div className="flex gap-10 overflow-hidden ">
 
-      <div className="flex flex-col items-center justify-center px-4 py-5 sm:p-6 shadow-xl rounded-2xl bg-gray-600 ">
+      <div className="flex flex-col items-center justify-center px-4 py-5 sm:p-6 shadow-xl rounded-2xl bg-[#393e46]">
         <h3 className="text-3xl text-center font-bold text-white mb-2">Student Login</h3>
         <div className='flex text-6xl justify-center items-center rounded-full border-4 aspect-square w-1/2 my-4 '><PiStudent/></div>
         <p className="text-md text-gray-200 mb-4">Login to access student features.</p>
@@ -24,7 +24,7 @@ function Landingpage() {
         </Link>
       </div>
 
-      <div className="flex flex-col items-center justify-center px-4 py-5 sm:p-6 shadow-xl rounded-2xl bg-gray-600 ">
+      <div className="flex flex-col items-center justify-center px-4 py-5 sm:p-6 shadow-xl rounded-2xl bg-[#393e46] ">
         <h3 className="text-3xl text-center font-bold text-white mb-2">Faculty Login</h3>
         <div className='flex text-6xl justify-center items-center rounded-full border-4 aspect-square w-1/2 my-4 '><FaChalkboardTeacher/></div>
         <p className="text-md text-gray-200 mb-4">Login to access faculty features.</p>

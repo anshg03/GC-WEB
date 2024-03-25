@@ -8,6 +8,7 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import DescriptionIcon from '@mui/icons-material/Description';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import ChecklistIcon from '@mui/icons-material/Checklist';
+import GroupsIcon from '@mui/icons-material/Groups';
 
 function Adminlayout({children}) {
   const router = useRouter();
@@ -31,12 +32,12 @@ function Adminlayout({children}) {
                 <h1 className="text-white text-[32px] font-bold px-4 mb-4">Admin Portal</h1>
                 <ul className="text-white ">
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/dashboard" ><div className='py-2 '><HomeIcon className='pb-1'/> Dashboard</div></Link> </li>
-                  <li className="my-2  px-4 hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/students" ><div className='py-2'><PersonIcon className='pb-1'/> Students</div></Link> </li>
+                  <li className="my-2  px-4 hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/students" ><div className='py-2'><GroupsIcon className='pb-1'/> Students</div></Link> </li>
                   <li className="my-2  px-4 hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/facultys" ><div className='py-2'><PersonIcon className='pb-1'/> Faculty</div></Link> </li>
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href='/admin/courses' ><div className='py-2'><AutoStoriesIcon className='pb-1'/> Courses</div></Link></li>
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href='/admin/attendancerecord' ><div className='py-2'><DescriptionIcon className='pb-1'/> Attendance Record</div></Link></li>
-                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/grading" ><div className='py-2'><CreditScoreIcon className='pb-1'/> Grading</div></Link> </li>
-                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer">  <Link href="/admin/feedbackanalysis" ><div className='py-2'><ChecklistIcon className='pb-1'/> Feedback Analysis</div></Link></li>
+                  {/* <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/grading" ><div className='py-2'><CreditScoreIcon className='pb-1'/> Grading</div></Link> </li> */}
+                  {/* <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer">  <Link href="/admin/feedbackanalysis" ><div className='py-2'><ChecklistIcon className='pb-1'/> Feedback Analysis</div></Link></li> */}
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer">  <Link href="/admin/addbranch" ><div className='py-2'><AddIcon /> Add Branch</div></Link></li>
                 </ul>
               </div>
@@ -47,7 +48,7 @@ function Adminlayout({children}) {
                 }} className="bg-gray-700 text-white py-2 px-4 rounded-lg hover:bg-gray-600">
                   Update Password
                 </button> */}
-                <button onClick={logoutFunction} className="bg-gray-700 text-red-500 py-2 px-4 rounded-lg hover:bg-gray-600">
+                <button onClick={logoutFunction} className="bg-gray-700 font-semibold text-red-500 py-2 px-4 rounded-lg hover:bg-gray-600">
                   Logout
                 </button>
               </div>

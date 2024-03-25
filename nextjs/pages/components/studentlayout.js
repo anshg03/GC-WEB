@@ -45,7 +45,7 @@ function StudentLayout({children}) {
                 }} className="bg-gray-700 text-yellow-500 py-2 px-4 rounded-lg hover:bg-gray-600">
                   Update Password
                 </button>
-                <button onClick={logoutFunction} className="bg-gray-700 text-red-500 py-2 px-4 rounded-lg hover:bg-gray-600 ">
+                <button onClick={logoutFunction} className="bg-gray-700 font-semibold text-red-500 py-2 px-4 rounded-lg hover:bg-gray-600 ">
                   Logout
                 </button>
             </div>
