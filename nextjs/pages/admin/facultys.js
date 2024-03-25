@@ -14,10 +14,10 @@ function FacultysBody() {
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4">
         {/* Card 1: All Facultys */}
         <div className="flex flex-col items-center justify-center bg-gray-400 p-4 rounded-lg">
-          <h2 className="text-lg font-semibold mb-2">All Facultys</h2>
+          <h2 className="text-lg font-semibold mb-2">All Faculty</h2>
           <GroupIcon className="w-16 h-16"/>
           {/* Add onClick event handler to navigate to the page showing all Facultys */}
-          <button onClick={()=>{router.push("/admin/faculty/allfaculty")}} className="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md w-full">View All Facultys</button>
+          <button onClick={()=>{router.push("/admin/faculty/allfaculty")}} className="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md w-full">View All Faculty</button>
         </div>
         {/* Card 2: Add Faculty */}
         <div className="flex flex-col items-center justify-center bg-gray-400 p-4 rounded-lg">
