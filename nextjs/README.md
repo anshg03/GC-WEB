@@ -25,7 +25,7 @@ This project is made using Next.js [Learn Next.js](https://nextjs.org/learn).
 To install the project, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/anshg03/GC-WEB.git`
-2. Navigate to the project directory: `cd nextjs`
+2. Navigate to the project directory: `cd ./nextjs`
 3. Install the dependencies: `npm install`
 
 ## Usage
