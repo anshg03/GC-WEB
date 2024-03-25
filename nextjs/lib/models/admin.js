@@ -25,4 +25,10 @@ const adminSchema = mongoose.Schema(
   { strict: false }
 );
 
-export default mongoose.model("admin", adminSchema);
+let adminModel
+if (!mongoose.models.admin)
+ adminModel = mongoose.model("admin", adminSchema);
+
+console.log(mongoose.models.admin)
+
+export default  mongoose.models.admin || adminModel;

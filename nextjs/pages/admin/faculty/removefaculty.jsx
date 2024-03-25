@@ -23,12 +23,12 @@ import {
 } from "@mui/material";
 import AdminCard from "../../../components/AdminCard";
 
-const Removestudent = () => {
+const Removefaculty = () => {
   const [searchCriteria, setSearchCriteria] = useState("name");
   const [searchDetails, setSearchDetails] = useState("");
-  const [students, setStudents] = useState([]); // This will hold all students
-  const [filteredStudents, setFilteredStudents] = useState([]); // This will hold the students that match the search
-  const [selectedStudents, setSelectedStudents] = useState([]); // This will hold the selected students
+  const [faculties, setFaculties] = useState([]); // This will hold all faculties
+  const [filteredFaculties, setFilteredFaculties] = useState([]); // This will hold the faculties that match the search
+  const [selectedFaculties, setSelectedFaculties] = useState([]); // This will hold the selected faculties
 
   const [openDialog, setOpenDialog] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -54,46 +54,46 @@ const Removestudent = () => {
     setOpenSnackbar(false);
   };
 
-  // Fetch students from dummy data when the component mounts
+  // Fetch faculties from dummy data when the component mounts
   useEffect(() => {
-    const fetchStudents = async () => {
+    const fetchFaculties = async () => {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve([
             { id: 1, name: "John Doe", branch: "Computer Science" },
             { id: 2, name: "Jane Doe", branch: "Electrical Engineering" },
-            // Add more dummy students
+            // Add more dummy faculties
           ]);
         }, 1000);
       });
     };
     const fetchData = async () => {
         setIsLoading(true);
-      const data = await fetchStudents();
-      setStudents(data);
-      setFilteredStudents(data);
+      const data = await fetchFaculties();
+      setFaculties(data);
+      setFilteredFaculties(data);
       setIsLoading(false);
     };
 
     fetchData();
   }, []);
 
-  // Update the filtered students when the search criteria or details change
+  // Update the filtered faculties when the search criteria or details change
   useEffect(() => {
     const lowerCaseSearchDetails = searchDetails.toLowerCase();
 
-    setFilteredStudents(
-      students.filter((student) => {
+    setFilteredFaculties(
+      faculties.filter((faculty) => {
         if (searchCriteria === "branch") {
-          return student.branch.toLowerCase().includes(lowerCaseSearchDetails);
+          return faculty.branch.toLowerCase().includes(lowerCaseSearchDetails);
         } else if (searchCriteria === "name") {
-          return student.name.toLowerCase().includes(lowerCaseSearchDetails);
+          return faculty.name.toLowerCase().includes(lowerCaseSearchDetails);
         } else {
           return true;
         }
       })
     );
-  }, [searchCriteria, searchDetails, students]);
+  }, [searchCriteria, searchDetails, faculties]);
 
   const handleCriteriaChange = (event) => {
     setSearchCriteria(event.target.value);
@@ -103,19 +103,19 @@ const Removestudent = () => {
     setSearchDetails(event.target.value);
   };
 
-  const handleCheckboxChange = (event, student) => {
+  const handleCheckboxChange = (event, faculty) => {
     if (event.target.checked) {
-      setSelectedStudents((prev) => [...prev, student]);
+      setSelectedFaculties((prev) => [...prev, faculty]);
     } else {
-      setSelectedStudents((prev) => prev.filter((s) => s.id !== student.id));
+      setSelectedFaculties((prev) => prev.filter((s) => s.id !== faculty.id));
     }
   };
 
-  const removeSelectedStudents = () => {
-    setStudents((prev) =>
-      prev.filter((student) => !selectedStudents.includes(student))
+  const removeSelectedFaculties = () => {
+    setFaculties((prev) =>
+      prev.filter((faculty) => !selectedFaculties.includes(faculty))
     );
-    setSelectedStudents([]);
+    setSelectedFaculties([]);
     handleCloseDialog();
     handleOpenSnackbar();
   };
@@ -129,18 +129,18 @@ const Removestudent = () => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Remove Selected Students"}
+          {"Remove Selected Faculties"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to remove the selected students?
+            Are you sure you want to remove the selected faculties?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog} color="primary">
             Cancel
           </Button>
-          <Button onClick={removeSelectedStudents} color="primary" autoFocus>
+          <Button onClick={removeSelectedFaculties} color="primary" autoFocus>
             Remove
           </Button>
         </DialogActions>
@@ -157,7 +157,7 @@ const Removestudent = () => {
           variant="filled"
           sx={{ width: "100%" }}
         >
-          Students removed successfully
+          Faculties removed successfully
         </Alert>
       </Snackbar>
       <Grid container spacing={3}>
@@ -185,7 +185,7 @@ const Removestudent = () => {
           />
         </Grid>
       </Grid>
-      {/* Display the filtered students */}
+      {/* Display the filtered faculties */}
       <TableContainer component={Paper} sx={{ margin: "5px 0px" }}>
         <Table>
           <TableHead>
@@ -202,23 +202,23 @@ const Removestudent = () => {
                   <CircularProgress />
                 </TableCell>
               </TableRow>
-            ) : filteredStudents.length > 0 ? (
-              filteredStudents.map((student) => (
-                <TableRow key={student.id}>
+            ) : filteredFaculties.length > 0 ? (
+              filteredFaculties.map((faculty) => (
+                <TableRow key={faculty.id}>
                   <TableCell>
                     <Checkbox
-                      onChange={(event) => handleCheckboxChange(event, student)}
+                      onChange={(event) => handleCheckboxChange(event, faculty)}
                       color="primary"
                     />
                   </TableCell>
-                  <TableCell>{student.name}</TableCell>
-                  <TableCell>{student.branch}</TableCell>
+                  <TableCell>{faculty.name}</TableCell>
+                  <TableCell>{faculty.branch}</TableCell>
                 </TableRow>
               ))
             ) : (
               <TableRow>
                 <TableCell colSpan={3} align="center">
-                  No students
+                  No faculties
                 </TableCell>
               </TableRow>
             )}
@@ -229,7 +229,7 @@ const Removestudent = () => {
         variant="contained"
         color="error"
         onClick={handleOpenDialog}
-        disabled={selectedStudents.length === 0}
+        disabled={selectedFaculties.length === 0}
       >
         Remove
       </Button>
@@ -237,4 +237,4 @@ const Removestudent = () => {
   );
 };
 
-export default Removestudent;
+export default Removefaculty;

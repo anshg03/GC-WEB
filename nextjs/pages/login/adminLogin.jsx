@@ -43,6 +43,8 @@ const AdminLogin = () => {
       if (res.message === "Login Successful") {
         localStorage.setItem("adminToken", res.adminToken)
         router.push("../admin/home")
+      } else {
+        console.log('dnks')
       }
     })
     // if (Object.keys(newErrors).length > 0) {

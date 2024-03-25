@@ -19,4 +19,10 @@ const attendenceSchema = new Schema({
   },
 });
 
-export default mongoose.model("attendance", attendenceSchema);
+let attendenceModel
+if (!mongoose.models.attendence)
+ attendenceModel = mongoose.model("attendence", attendenceSchema);
+
+console.log(mongoose.models.attendence)
+
+export default  mongoose.models.attendence || attendenceModel;

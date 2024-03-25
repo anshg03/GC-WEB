@@ -34,6 +34,11 @@ const solutionSchema = new Schema({
   },
 });
 
-const Solution = mongoose.model("solution", solutionSchema);
 
-export default Solution;
+let solutionModel
+if (!mongoose.models.solution)
+ solutionModel = mongoose.model("solution", solutionSchema);
+
+console.log(mongoose.models.solution)
+
+export default  mongoose.models.solution || solutionModel;

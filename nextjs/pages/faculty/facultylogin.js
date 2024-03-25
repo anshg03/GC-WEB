@@ -7,13 +7,27 @@ import Link from 'next/link';
 
 const facultylogin = () => {
   const router = useRouter();
+  const [faculty, setFaculty] = useState({
+    email: "",
+    password: ""
+  })
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await fetch("../api/Faculty/login", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(faculty)
+    }).then(res => res.json())
+    .then(res => console.log(res))
     if (username === 'faculty' && password === 'password') {
       
       router.push("/faculty/dashboard")
@@ -21,6 +35,13 @@ const facultylogin = () => {
       setError('Invalid username or password');
     }
   };
+  const handleChange = (e) => {
+    const {name, value} = e.target
+    setFaculty({
+      ...faculty,
+      [name]: value
+    })
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[#141415]">
@@ -34,18 +55,18 @@ const facultylogin = () => {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="username" className="sr-only">
-                Username
+              <label htmlFor="email" className="sr-only">
+                Email
               </label>
               <input
-                id="username"
-                name="username"
+                id="email"
+                name="email"
                 type="text"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Email"
+                value={faculty.email}
+                onChange={handleChange}
                 autoComplete='off'
               />
             </div>
@@ -60,8 +81,8 @@ const facultylogin = () => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500  sm:text-sm"
                 placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={faculty.password}
+                onChange={handleChange}
               />
               <button
                 type="button"

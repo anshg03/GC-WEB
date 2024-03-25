@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt"
 import connectDB from "../../../middlewares/mongoose"
-import admin from "../../../models/admin"
+import admin from "../../../lib/models/admin"
 import jwt from"jsonwebtoken"
 
 const handler = async (req, res) => {

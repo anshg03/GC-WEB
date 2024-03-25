@@ -69,9 +69,11 @@ const AddStudent = () => {
     name: "",
     email: "",
     password: "",
-    year: "",
+    joiningYear: "",
+    username: "",
     gender: "",
     branch: "",
+    designation: "",
     contactNo: "",
     dob: null,
   });
@@ -109,20 +111,10 @@ const AddStudent = () => {
     return Object.values(tempErrors).every((x) => x === "");
   };
 
-  const handleAddClick = async () => {
-    console.log(form)
-    await fetch("../../api/Admin/addStudent", {
-      method:"POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(form)
-    }).then(res=>res.json())
-    .then(res => console.log(res))
-    // if (validateForm()) {
-    //   setOpen(true);
-    // }
+  const handleAddClick = () => {
+    if (validateForm()) {
+      setOpen(true);
+    }
   };
 
   const handleClose = () => {
@@ -216,8 +208,9 @@ const AddStudent = () => {
                     >
                       {field.charAt(0).toUpperCase() + field.slice(1)}:
                     </InputLabel>
-                    {field === "year" ||
-                    field === "branch" ? (
+                    {field === "joiningYear" ||
+                    field === "branch" ||
+                    field === "section" ? (
                       <FormControl fullWidth>
                         <Select
                           id={field}
@@ -228,9 +221,7 @@ const AddStudent = () => {
                           style={{ height: "70%" }}
                         >
                           {/* Replace this array with your actual data */}
-                          {(field == "branch"
-                           ? ["Computer Science Engineering", "Electronics and Communication Engineering", "Electrical Engineering", "Mechanical Engineering", "Civil Engineering", "Metallurgy"]
-                           : ["2019", "2020", "2021", "2022", "2023", "2024"]).map(
+                          {["Option 1", "Option 2", "Option 3"].map(
                             (option, index) => (
                               <MenuItem key={index} value={option}>
                                 {option}
@@ -240,7 +231,7 @@ const AddStudent = () => {
                         </Select>
                       </FormControl>
                     ) : field === "dob" ? (
-                      <Box width={"75%"}>
+                      <Box width={"50%"}>
                         <CustomDatePicker
                           id={field}
                           name={field}

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-const studentSchema = new Schema({
+const facultySchema =new Schema({
   name: {
     type: String,
     required: true,
@@ -12,34 +12,20 @@ const studentSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
   },
-  year: {
-    type: Number,
-    required: true,
-  },
-  subjects: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "subject",
-    },
-  ],
   username: {
     type: String,
   },
   gender: {
     type: String,
   },
+  designation: {
+    type: String,
+    required: true,
+  },
   branch: {
     type: String,
     required: true,
-  },
-  section: {
-    type: String,
-    required: true,
-  },
-  batch: {
-    type: String,
   },
   contactNumber: {
     type: Number,
@@ -48,10 +34,20 @@ const studentSchema = new Schema({
     type: String,
     required: true,
   },
+  joiningYear: {
+    type: Number,
+    required: true,
+  },
   passwordUpdated: {
     type: Boolean,
     default: false,
   },
 });
 
-export default mongoose.model("student", studentSchema);
+let facultyModel
+if (!mongoose.models.faculty)
+ facultyModel = mongoose.model("faculty", facultySchema);
+
+console.log(mongoose.models.faculty)
+
+export default  mongoose.models.faculty || facultyModel;
