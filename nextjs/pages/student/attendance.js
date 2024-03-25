@@ -39,10 +39,10 @@ function AttendanceContent(){
             {student.subjects.map((subject, index) => (
               <tr key={index}>
                 <td className="px-6 py-4 whitespace-nowrap text-center">{subject}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-center">N</td>
-                <td className="px-6 py-4 whitespace-nowrap text-center">M</td>
+                <td className="px-6 py-4 whitespace-nowrap text-center">{15+((2*index)+1)}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-center">{9+((2*index)+1)}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-center">
-                  %
+                 {(9+((2*index)+1))*100/(15+((2*index)+1))} %
                 </td>
               </tr>
             ))}

@@ -38,7 +38,7 @@ function ResultContent(){
               <tr key={index}>
                 <td className="px-6 py-4 whitespace-nowrap text-center">{index+1}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-center">{subject}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-center">grade</td>
+                <td className="px-6 py-4 whitespace-nowrap text-center">B</td>
                
               </tr>
             ))}
