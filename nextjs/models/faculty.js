@@ -13,16 +13,13 @@ const facultySchema =new Schema({
   password: {
     type: String,
   },
-  username: {
-    type: String,
-  },
   gender: {
     type: String,
   },
-  designation: {
-    type: String,
-    required: true,
-  },
+  // designation: {
+  //   type: String,
+  //   required: true,
+  // },
   branch: {
     type: String,
     required: true,

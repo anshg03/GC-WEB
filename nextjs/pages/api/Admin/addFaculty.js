@@ -6,37 +6,29 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 const handler = async (req, res) => {
+  console.log(res.body);
   try {
-    const {
-      name,
-      dob,
-      branch,
-      contactNumber,
-      email,
-      joiningYear,
-      gender,
-      designation,
-    } = req.body;
+    const { name, dob, branch, contactNumber, email, joiningYear } = req.body;
     const existingFaculty = await faculty.findOne({ email });
     if (existingFaculty) {
       return res.status(400).json("Email already exists");
     }
-    const existingDepartment = await branch.findOne({ branch });
-    let departmentHelper = existingDepartment.departmentCode;
+    // const existingDepartment = await branch.findOne({ departmentName: branch });
+    // let departmentHelper = existingDepartment.departmentCode;
 
-    const faculties = await faculty.find({ department });
-    let helper;
-    if (faculties.length < 10) {
-      helper = "00" + faculties.length.toString();
-    } else if (faculties.length < 100 && faculties.length > 9) {
-      helper = "0" + faculties.length.toString();
-    } else {
-      helper = faculties.length.toString();
-    }
-    var date = new Date();
-    var components = ["FAC", date.getFullYear(), departmentHelper, helper];
+    // const faculties = await faculty.find({ branch });
+    // let helper;
+    // if (faculties.length < 10) {
+    //   helper = "00" + faculties.length.toString();
+    // } else if (faculties.length < 100 && faculties.length > 9) {
+    //   helper = "0" + faculties.length.toString();
+    // } else {
+    //   helper = faculties.length.toString();
+    // }
+    // var date = new Date();
+    // var components = ["FAC", date.getFullYear(), departmentHelper, helper];
 
-    var username = components.join("");
+    // var username = components.join("");
     let hashedPassword;
     const newDob = dob.split("-").reverse().join("-");
 
@@ -47,12 +39,9 @@ const handler = async (req, res) => {
       email,
       password: hashedPassword,
       joiningYear,
-      username,
       branch,
       contactNumber,
       dob,
-      gender,
-      designation,
       passwordUpdated,
     });
     await newFaculty.save();
