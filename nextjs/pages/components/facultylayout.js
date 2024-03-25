@@ -34,7 +34,7 @@ function Facultylayout({children}) {
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href='/faculty/assignments' ><div className='py-2'><AddIcon/> Create Assignment</div></Link></li>
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/faculty/grades" ><div className='py-2'><CreditScoreIcon className='pb-1'/> Grades</div></Link> </li>
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer">  <Link href="/faculty/attendance" ><div className='py-2'><ChecklistIcon className='pb-1'/> Attendance</div></Link></li>
-                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer rounded-xl font-bold color-gray-300">  <Link href="/faculty/updateprofile" ><div className='py-2'><EditNoteIcon /> Update Profile</div></Link></li>
+                  {/* <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer rounded-xl font-bold color-gray-300">  <Link href="/faculty/updateprofile" ><div className='py-2'><EditNoteIcon /> Update Profile</div></Link></li> */}
                 </ul>
               </div>
               {/* Sidebar footer */}

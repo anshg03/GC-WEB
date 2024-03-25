@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 const handler = async (req, res) => {
-  console.log(res.body);
+  console.log(req.body);
   try {
     const { name, dob, branch, contactNumber, email, joiningYear } = req.body;
     const existingFaculty = await faculty.findOne({ email });
