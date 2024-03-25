@@ -3,8 +3,10 @@ import connectDB from "../../../middlewares/mongoose";
 import admin from "../../../models/admin";
 
 const handler = async(req, res) => {
-    const {instructorEmail, adminEmail} = req.body
+    const {instructorEmail, adminToken} = req.body
     try {
+        const token = jwt.decode(adminToken, process.env.JWT_SECRET)
+        const adminEmail = token.email
         const existingAdmin = await admin.find({email: adminEmail})
         if (!existingAdmin) {
             res.status(401).json({

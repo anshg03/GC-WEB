@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import Adminlayout from '../../components/adminlayout'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Link from 'next/link';
@@ -6,7 +6,16 @@ import Link from 'next/link';
 
 
 function AllFacultyBody(){
-    const [Faculty, setFaculty] = useState([]);
+    const [faculty, setFaculty] = useState([]);
+    useEffect(() => {
+      const fetchFaculty = async () => {
+        await fetch("../../api/Admin/getAllFaculty", {
+          method: "GET",
+        }).then(res => res.json())
+        .then(res => setFaculty(res))
+      }
+      fetchFaculty();
+    }, [])
     const dummyFaculty = [
         { rollno: 1, name: 'John Doe', branch: 'Computer Science', year: 2020, subjects: ['Introduction to Computer Science', 'Data Structures and Algorithms'] },
         { rollno: 2, name: 'Alice Smith', branch: 'Electrical Engineering', year: 2021, subjects: ['Electrical Circuits', 'Digital Electronics'] },
@@ -35,7 +44,7 @@ function AllFacultyBody(){
             </tr>
           </thead>
           <tbody className="bg-gray-100 max-h-[450px] overflow-auto">
-            {dummyFaculty.map((Faculty) => (
+            {faculty.map((Faculty) => (
               <tr key={Faculty.rollno}>
                 <td className="border px-4 py-2 text-center text-sm">{Faculty.rollno}</td>
                 <td className="border px-4 py-2 text-sm">{Faculty.name}</td>
