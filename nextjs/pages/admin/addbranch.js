@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import Adminlayout from "../components/adminlayout"
 
@@ -141,4 +139,3 @@ function addbranch() {
 }
 
 export default addbranch
-

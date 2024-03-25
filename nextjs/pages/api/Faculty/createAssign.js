@@ -1,12 +1,13 @@
 import student from "../../../models/student.js";
-import connectDB from "../../../middleware/mongoose";
+import connectDB from "../../../middlewares/mongoose.js";
 import faculty from "../../../models/faculty.js";
 import branch from "../../../models/branch.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import test from "../../../models/test";
+import test from "../../../models/test.js";
 
 const handler = async (req, res) => {
+  console.log(req.body);
   try {
     const {
       subjectCode,
@@ -14,15 +15,15 @@ const handler = async (req, res) => {
       year,
       section,
       date,
-      test,
+      tests,
       totalMarks,
       image,
     } = req.body;
     const newTest = await new test({
       totalMarks,
       section,
-      test,
       date,
+      tests,
       department,
       subjectCode,
       year,

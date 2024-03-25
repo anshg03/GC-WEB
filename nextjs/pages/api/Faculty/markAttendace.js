@@ -1,14 +1,15 @@
 import subject from "../../../models/subject.js";
-import faculty from "../../../models/faculty.js";
-import connectDB from "../../../middleware/mongoose";
+import student from "../../../models/student.js";
+import connectDB from "../../../middlewares/mongoose";
 import attendance from "../../../models/attendance.js";
 
 const handler = async (req, res) => {
+  console.log(req.body);
   try {
-    const { selectedStudents, subjectName, branch, year, section } = req.body;
+    const { selectedStudents, subjectName, branch, year } = req.body;
     const sub = await subject.findOne({ subjectName });
-    const allStudents = await Student.find({ branch, year, section });
-
+    const allStudents = await student.find({ branch, year });
+    console.log(allStudents.length);
     for (let i = 0; i < allStudents.length; i++) {
       const x = await attendance.findOne({
         student: allStudents[i]._id,

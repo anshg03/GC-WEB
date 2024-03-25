@@ -1,16 +1,16 @@
 import student from "../../../models/student.js";
-import connectDB from "../../../middleware/mongoose";
+import connectDB from "../../../middlewares/mongoose";
 import faculty from "../../../models/faculty.js";
 import branch from "../../../models/branch.js";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
+//import bcrypt from "bcryptjs";
 import subject from "../../../models/subject";
 
 const handler = async (req, res) => {
   try {
-    const { department, year, section } = req.body;
+    const { branch, year } = req.body;
     const errors = { noStudentError: String };
-    const students = await student.find({ department, year });
+    const students = await student.find({ branch, year });
 
     if (students.length === 0) {
       errors.noStudentError = "No Student Found";
