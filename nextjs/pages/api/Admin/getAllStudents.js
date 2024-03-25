@@ -3,7 +3,7 @@ import connectDB from "../../../middlewares/mongoose";
 import faculty from "../../../models/faculty.js";
 import branch from "../../../models/branch.js";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import subject from "../../../models/subject";
 
 const handler = async (req, res) => {

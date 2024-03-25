@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import Adminlayout from '../../components/adminlayout'
 import Link from 'next/link';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -10,11 +10,20 @@ function AddNewCourseComponent(){
         department: '',
         totalLectures: '',
         year: '',
-        attendance: '',
         instructorName: '',
         credits: ''
       });
-    
+      const [branches, setBranches] = useState([]);
+      useEffect(() => {
+        fetchBranch()
+    }, [])
+    const fetchBranch = async () => {
+      await fetch("../../api/Admin/getAllBranch", {
+        method: "GET",
+        mode: "cors",
+    }).then(res => res.json())
+    .then(res => setBranches(res))
+    }
       const handleChange = (e) => {
         setFormData({
           ...formData,
@@ -22,21 +31,18 @@ function AddNewCourseComponent(){
         });
       };
     
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
         // Handle form submission here
-        console.log(formData);
+        await fetch("../../api/Admin/createCourse", {
+          body: JSON.stringify(formData),
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }).then(res => res.json())
+        .then(res => console.log(res))
         // Reset form fields after submission
-        setFormData({
-          subjectName: '',
-          subjectCode: '',
-          department: '',
-          totalLectures: '',
-          year: '',
-          attendance: '',
-          instructorName: '',
-          credits: ''
-        });
       };
     
       return (
@@ -76,15 +82,12 @@ function AddNewCourseComponent(){
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="department">
                 Department
               </label>
-              <input
-                type="text"
-                id="department"
-                name="department"
-                value={formData.department}
-                onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
-              />
+              <select name='department' value={formData.department} onChange={handleChange} className="border rounded px-3 py-2 w-full">
+                      <option value="">Select Branch</option>
+                      {branches.map((branch,index)=> (
+                          <option key={index} value={formData.departmentName}>{branch.departmentName}</option>
+                        ))}    
+                  </select>
             </div>
             <div className="mb-2">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="totalLectures">
@@ -109,20 +112,6 @@ function AddNewCourseComponent(){
                 id="year"
                 name="year"
                 value={formData.year}
-                onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
-              />
-            </div>
-            <div className="mb-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="attendance">
-                Attendance
-              </label>
-              <input
-                type="text"
-                id="attendance"
-                name="attendance"
-                value={formData.attendance}
                 onChange={handleChange}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required

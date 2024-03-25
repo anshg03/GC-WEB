@@ -52,6 +52,7 @@ const handler = async (req, res) => {
       branch: branchName,
       contactNumber,
       email,
+      subjects: [],
       year,
       passwordUpdated,
     });

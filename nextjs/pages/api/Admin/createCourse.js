@@ -10,6 +10,7 @@ const handler = async (req, res) => {
       credits,
       department,
       totalLectures,
+      year
     } = req.body;
     const newSubject =new subject({
       subjectCode: subjectCode,
@@ -21,7 +22,8 @@ const handler = async (req, res) => {
       totalLectures: totalLectures,
     });
     await newSubject.save();
-    const students = await student.find({ department, year });
+    const students = await student.find({ branch: department, year: year });
+    // console.log(students)
     if (students.length !== 0) {
       for (var i = 0; i < students.length; i++) {
         students[i].subjects.push(newSubject._id);
@@ -35,7 +37,9 @@ const handler = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.json(error).status(500);
+    res.status(500).json({
+      error: error
+    });
   }
 };
 
