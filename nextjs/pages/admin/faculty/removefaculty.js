@@ -47,7 +47,7 @@ const RemoveFacultyComponent = ({ Faculty, setFaculty }) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        email: email,
+        instructorEmail: email,
         adminToken: localStorage.getItem("adminToken")
       })
     }).then(res => res.json())

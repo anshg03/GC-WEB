@@ -1,6 +1,7 @@
-import faculty from "../../../models/subject";
+import faculty from "../../../lib/models/faculty";
 import connectDB from "../../../middlewares/mongoose";
-import admin from "../../../models/admin";
+import jwt from "jsonwebtoken"
+import admin from "../../../lib/models/admin";
 
 const handler = async(req, res) => {
     const {instructorEmail, adminToken} = req.body
@@ -14,7 +15,12 @@ const handler = async(req, res) => {
                 message: "Unauthorized access request"
             })
         }
+        console.log(instructorEmail)
         await faculty.findOneAndDelete({email: instructorEmail})
+        res.status(200).json({
+            message: "Faculty removed",
+            success: true
+        })
     } catch (error) {
         console.log(error)
         res.status(500).json({

@@ -16,6 +16,9 @@ function AllFacultyBody(){
       }
       fetchFaculty();
     }, [])
+    useEffect(() => {
+      console.log(faculty)
+    }, [faculty])
     const dummyFaculty = [
         { rollno: 1, name: 'John Doe', branch: 'Computer Science', year: 2020, subjects: ['Introduction to Computer Science', 'Data Structures and Algorithms'] },
         { rollno: 2, name: 'Alice Smith', branch: 'Electrical Engineering', year: 2021, subjects: ['Electrical Circuits', 'Digital Electronics'] },
@@ -50,7 +53,7 @@ function AllFacultyBody(){
                 <td className="border px-4 py-2 text-sm">{Faculty.name}</td>
                 <td className="border px-4 py-2 text-sm">{Faculty.branch}</td>
                 <td className="border px-4 py-2 text-sm">{Faculty.year}</td>
-                <td className="border px-4 py-2 text-sm">{Faculty.subjects.join(', ')}</td>
+                {/* <td className="border px-4 py-2 text-sm">{Faculty.subjects.join(', ')}</td> */}
               </tr>
             ))}
           </tbody>
