@@ -8,7 +8,7 @@ const AdminCard = ({ children }) => {
 
   const handleLogout = () => {
     // Here you would typically handle the logout process, e.g., removing the user's session
-    router.push("/admin/login");
+    router.push("/");
   };
 
   return (
