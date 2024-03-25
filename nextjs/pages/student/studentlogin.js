@@ -17,7 +17,7 @@ const studentlogin = () => {
     e.preventDefault();
     if (username === 'student' && password === 'password') {
       alert('Login successful');
-      router.push("/student/dashboard");
+      router.push("/student/profile");
     } else {
       setError('Invalid username or password');
     }
