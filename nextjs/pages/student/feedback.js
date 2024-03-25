@@ -1,22 +1,22 @@
 import React from 'react'
 import StudentLayout from '../components/studentlayout'
 
-function DashboardContent(){
+function FeedbackContent(){
   return(
     <>
-    Student Dashboard
+    Feedback
     </>
   )
 }
 
-function dashboard() {
+function Feedback() {
   return (
     <> 
       <StudentLayout>
-        <DashboardContent/>
+        <FeedbackContent/>
       </StudentLayout>
     </>
   )
 }
 
-export default dashboard
+export default Feedback
