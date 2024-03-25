@@ -2,12 +2,15 @@ import React,{useState} from 'react'
 import Adminlayout from '../../components/adminlayout'
 import Link from 'next/link'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { useRouter } from 'next/router';
 
 const RemoveFacultyComponent = ({ Faculty, setFaculty }) => {
+  const router = useRouter()
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     rollno: ''
   });
+  const [email, setEmail] = useState("")
 
   const dummyFaculty = [
     { rollno: 1, username:'johndoe', name: 'John Doe', branch: 'Computer Science', year: 2020, subjects: ['Introduction to Computer Science', 'Data Structures and Algorithms'] },
@@ -23,26 +26,37 @@ const RemoveFacultyComponent = ({ Faculty, setFaculty }) => {
 ];
 
   const handleChange = (e) => {
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { username, rollno } = formData;
-
+    if (!localStorage.getItem("adminToken")) {
+      alert("You are not authorized to do so")
+      router.push("/admin/adminlogin")
+    }
+    await fetch("../../api/Admin/deleteFaculty", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        instructorEmail: email,
+        adminToken: localStorage.getItem("adminToken")
+      })
+    }).then(res => res.json())
+    .then(res => console.log(res))
     // Check if Faculty exists in the list
      //write logic for removing Faculty
       // alert(`Faculty with roll number ${rollno} removed successfully.`);
     
 
-    // Clear the form fields
-    setFormData({
-      username: '',
-      rollno: ''
-    });
   };
 
   return (
@@ -52,27 +66,14 @@ const RemoveFacultyComponent = ({ Faculty, setFaculty }) => {
       <form onSubmit={handleSubmit} className="max-w-sm">
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-            Username
+            Email
           </label>
           <input
             type="text"
             id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="rollno">
-            Roll No
-          </label>
-          <input
-            type="text"
-            id="rollno"
-            name="rollno"
-            value={formData.rollno}
-            onChange={handleChange}
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
