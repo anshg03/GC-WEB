@@ -1,44 +1,44 @@
-import student from "../../../models/student.js";
+import student from "../../../lib/models/student.js";
 import connectDB from "../../../middlewares/mongoose.js";
-import faculty from "../../../models/faculty.js";
-import branch from "../../../models/branch.js";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import subject from "../../../models/subject";
+import subject from "../../../lib/models/subject";
+import branch from "../../../lib/models/branch.js";
 
 const handler = async (req, res) => {
   try {
     const {
       name,
       dob,
-      department,
+      branchName,
       contactNumber,
       email,
-      gender,
+      rollNumber,
       year,
     } = req.body;
     const existingStudent = await student.findOne({ email });
     if (existingStudent) {
-      errors.emailError = "Email already exists";
-      return res.status(400).json(errors);
+      // errors.emailError = "Email already exists";
+      return res.status(400).json({
+        message: "Student already exist"
+      });
     }
 
-    const existingDepartment = await branch.findOne({ department });
-    let departmentHelper = existingDepartment.departmentCode;
-    const students = await student.find({ branch })
-    let helper;
-    if (students.length < 10) {
-      helper = "00" + students.length.toString();
-    } else if (students.length < 100 && students.length > 9) {
-      helper = "0" + students.length.toString();
-    } else {
-      helper = students.length.toString();
-    }
+    const existingDepartment = await branch.findOne({ departmentName: branchName });
+    // let departmentHelper = existingDepartment.departmentCode;
+    // const students = await student.find({ branch })
+    // let helper;
+    // if (students.length < 10) {
+    //   helper = "00" + students.length.toString();
+    // } else if (students.length < 100 && students.length > 9) {
+    //   helper = "0" + students.length.toString();
+    // } else {
+    //   helper = students.length.toString();
+    // }
 
-    var date = new Date();
-    var components = ["STU", date.getFullYear(), departmentHelper, helper];
+    // var date = new Date();
+    // var components = ["STU", date.getFullYear(), departmentHelper, helper];
 
-    var rollNumber = components.join("");
+    // var rollNumber = rollNumber;
     let hashedPassword;
     const newDob = dob.split("-").reverse().join("-");
     hashedPassword = await bcrypt.hash(newDob, 10);
@@ -49,17 +49,16 @@ const handler = async (req, res) => {
       dob,
       password: hashedPassword,
       rollNumber,
-      branch,
+      branch: branchName,
       contactNumber,
       email,
-      gender,
       year,
       passwordUpdated,
     });
     await newStudent.save();
 
-    const subjects = await subject.find({ department, year });
-    console.log(department, subjects)
+    const subjects = await subject.find({ branchName, year });
+    // console.log(department, subjects)
     if (subjects.length !== 0) {
       for (var i = 0; i < subjects.length; i++) {
         newStudent.subjects.push(subjects[i]._id);

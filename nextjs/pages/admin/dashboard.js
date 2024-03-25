@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Adminlayout from '../components/adminlayout';
 
 const AdminDashboard = () => {
+    const [admin, setAdmin] = useState({})
+
+    useEffect(() => {
+      if (!localStorage.getItem("adminToken")) {
+        Router.push("/admin/adminlogin")
+      }
+      fetchAdmin()
+    }, [])
+    const fetchAdmin = async () => {
+      await fetch("../api/Admin/getAdminProfile", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          token: localStorage.getItem("adminToken")
+        })
+      }).then(res =>res.json())
+        .then(res => setAdmin(res.admin))
+    }
 
     const adminDetails = {
         name: "John Doe",
@@ -39,15 +60,7 @@ const AdminDashboard = () => {
             readOnly
           />
         </div>
-        <div className="mb-4 ">
-          <label className="block text-gray-700 font-bold mb-2">Gender:</label>
-          <input
-            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight cursor-not-allowed"
-            type="text"
-            value={adminDetails.gender}
-            readOnly
-          />
-        </div>
+        
        
         <div className="mb-2">
           <label className="block text-gray-700 font-bold mb-2">
@@ -60,28 +73,6 @@ const AdminDashboard = () => {
             readOnly
           />
         </div>
-        <div className="mb-2">
-          <label className="block text-gray-700 font-bold mb-2">
-            Date of Birth:
-          </label>
-          <input
-            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight cursor-not-allowed"
-            type="text"
-            value={adminDetails.dob}
-            readOnly
-          />
-        </div>
-        <div className="mb-2">
-          <label className="block text-gray-700 font-bold mb-2">
-            Joining Year:
-          </label>
-          <input
-            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight cursor-not-allowed"
-            type="text"
-            value={adminDetails.joiningYear}
-            readOnly
-          />
-          </div>
         </div>
       </div>
   );

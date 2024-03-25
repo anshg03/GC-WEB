@@ -1,12 +1,30 @@
 
+
 import React, { useEffect, useState } from 'react';
 import Adminlayout from "../components/adminlayout"
 
 function AddBranchComponent() {
     const [branchCode, setBranchCode] = useState('');
     const [branchName, setBranchName] = useState('');
-    const [branches, setBranches] = useState();
+    const [branches, setBranches] = useState([]);
+    const [branch, setBranch] = useState({
+        departmentCode: "",
+        departmentName: ""
+    })
 
+    useEffect(() => {
+        fetchData()
+    }, [])
+    const fetchData = async () => {
+        await fetch("../api/Admin/getAllBranch", {
+            method: "GET",
+            mode: "cors",
+        }).then(res => res.json())
+        .then(res => setBranches(res))
+    }
+    useEffect(() => {
+        console.log(branches)
+    }, [branches])
     const dummyBranches = [
         { code: 'CS', name: 'Computer Science' },
         { code: 'EE', name: 'Electrical Engineering' },
@@ -49,21 +67,43 @@ function AddBranchComponent() {
         }
     };
 
+    const handleChange = (e) => {
+        setBranch({
+            ...branch,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleSubmit = async () => {
+        console.log(branch)
+        await fetch("../api/Admin/addBranch", {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(branch)
+        }).then(res => res.json())
+        .then(res => {
+            fetchData()
+        })
+    }
+
     return (
         <div className="container mx-auto p-4">
-            <h2 className="text-2xl font-bold mb-4 text-green-500 ">Add Branch</h2>
+            <h2 className="text-2xl font-bold mb-4">Add Branch</h2>
             <div className='flex gap-4'>
             <div className="mb-4">
                 <label className="block mb-2 font-semibold">Branch Code:</label>
-                <input placeholder='Enter Branch Code' type="text" value={branchCode} onChange={handleBranchCodeChange} className="border rounded px-3 py-2 w-64" />
+                <input type="text" name='departmentCode' value={branch.departmentCode} onChange={handleChange} className="border rounded px-3 py-2 w-64" />
             </div>
             <div className="mb-4">
                 <label className="block mb-2 font-semibold">Branch Name:</label>
-                <input placeholder='Enter Branch Name' type="text" value={branchName} onChange={handleBranchNameChange} className="border rounded px-3 py-2 w-64" />
+                <input type="text" name='departmentName' value={branch.departmentName} onChange={handleChange} className="border rounded px-3 py-2 w-64" />
             </div>
             </div>
-            <button onClick={handleAddBranch} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Branch</button>
-            <hr className="mt-5" />
+            <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Branch</button>
+            <hr className="my-4" />
             <div className="container mx-auto p-4">
             <h2 className="text-2xl font-bold mb-4 text-center">All Branches</h2>
             <div className="overflow-x-auto">
@@ -75,10 +115,10 @@ function AddBranchComponent() {
                         </tr>
                     </thead>
                     <tbody>
-                        {dummyBranches.map((branch, index) => (
+                        {branches.map((branch, index) => (
                             <tr key={index}>
-                                <td className="px-4 py-2 border border-gray-300 text-center">{branch.code}</td>
-                                <td className="px-4 py-2 border border-gray-300 text-center">{branch.name}</td>
+                                <td className="px-4 py-2 border border-gray-300 text-center">{branch.departmentCode}</td>
+                                <td className="px-4 py-2 border border-gray-300 text-center">{branch.departmentName}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -90,7 +130,7 @@ function AddBranchComponent() {
 }
 
 
-function AddBranch() {
+function addbranch() {
   return (
     <>
       <Adminlayout>
@@ -100,5 +140,5 @@ function AddBranch() {
   )
 }
 
-export default AddBranch
+export default addbranch
 
