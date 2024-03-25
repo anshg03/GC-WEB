@@ -1,10 +1,8 @@
-# Next.js Starter Template
-
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+# **ERP system**
 
 ## Project Overview
 
-This project is a web application built with Next.js. It includes features such as...
+College ERP System is a web application developed using Next.js for efficient management of academic and extracurricular activities in educational institutions. This application integrates features such as Student Profile Management, Course Registration, Attendance Tracking, Grading System, Feedback and Survey System, Event Management, and Career Development Resources.
 
 ## Installation
 
@@ -18,14 +16,16 @@ To install the project, follow these steps:
 
 To run the project, use the command: `npm run dev`
 
-# **ERP system**
-
 
 ## Problem Statement
 
 In modern educational institutions, efficient management of academic and extracurricular activities is paramount for enhancing student experience and success. This hackathon challenge aims to develop a comprehensive ERP system for college students, integrating features such as Student Profile Management, Course Registration, Attendance Tracking, Grading System, Feedback and Survey System, Event Management, and Career Development Resources.
 
 ## MERN Stack
+
+### Next.js
+
+This project is made using Next.js [Learn Next.js](https://nextjs.org/learn).
 
 ### TechStack
 
