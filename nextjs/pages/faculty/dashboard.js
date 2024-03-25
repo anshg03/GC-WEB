@@ -29,28 +29,28 @@ function Dashboardbody() {
   
     return (
       <>
-      <div className="flex text-gray-400 items-center space-x-2 mb-4,mx-4">
+      <div className="flex text-gray-400 items-center space-x-2 mb-4 mx-4">
           < HomeIcon  className="text-3xl text-blue-600"/>
           <h1 className="text-2xl text-blue-600 font-bold pl-1"> {facultyName}</h1>
         </div>
-      <div className="max-w-screen-md mx-auto pt-4 overflow-auto">
+      <div className="max-w-screen mx-auto pt-4 overflow-auto">
         
         <h2 className="text-2xl font-bold mb-4 text-center">SUBJECTS TAUGHT</h2>
-        <div className="table-container max-h-[430px] overflow-y-auto border-4 p-3 rounded-xl">
-        <table className="w-full border-collapse border-3 rounded-xl border-gray-500 ">
+        <div className=" max-h-[470px] overflow-y-auto border-4 p-3">
+        <table className="w-full divide-x divide-y border-separate">
           <thead className="rounded-lg">
-            <tr className="bg-gray-300">
-              <th className="p-3 text-left">Subject Name</th>
-              <th className="p-3 text-left">Subject Code</th>
-              <th className="p-3 text-left">Total Lectures</th>
+            <tr className="bg-gray-400">
+              <th className="p-3 text-center">Subject Name</th>
+              <th className="p-3 text-center">Subject Code</th>
+              <th className="p-3 text-center">Total Lectures</th>
             </tr>
           </thead>
           <tbody>
             {subjects.map(subject => (
               <tr key={subject.id} className="hover:bg-gray-50 ">
-                <td className="p-3 px-6 font-semibold">{subject.name}</td>
-                <td className="p-3 px-6">{subject.code}</td>
-                <td className="p-3 px-12">{subject.lectures}</td>
+                <td className="p-3 px-6 font-semibold text-center">{subject.name}</td>
+                <td className="p-3 px-6 text-center">{subject.code}</td>
+                <td className="p-3 px-12 text-center">{subject.lectures}</td>
               </tr>
             ))}
           </tbody>
