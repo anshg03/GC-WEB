@@ -18,6 +18,11 @@ To install the project, follow these steps:
 
 To run the project, use the command: `npm run dev`
 
+### For Admin Permission:
+Admin email: anugrahgupta0812@gmail.com
+
+Admin password: 12345678
+
 
 ## Problem Statement
 
