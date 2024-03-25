@@ -18,6 +18,11 @@ To install the project, follow these steps:
 
 To run the project, use the command: npm run dev
 
+### For Admin Permission:
+Admin email: anugrahgupta0812@gmail.com
+
+Admin password: 12345678
+
 
 ## Problem Statement
 
@@ -65,6 +70,13 @@ This project is made using Next.js [Learn Next.js](https://nextjs.org/learn).
 - *Error Display and Form Validation:* Incorporates error display features with form validation, ensuring a smooth user experience and data integrity.
 - *Modern UI:* Offers a modern and intuitive user interface, enhancing usability and accessibility for all users.
 
+### Please inlcude the .env.local file with the following data to run locally
+MONGODB_URI=mongodb+srv://anshgup03:5KXOYbWmIk16CGPU@cluster0.nvep6ag.mongodb.net/
+JWT_SECRET=NOONECANBEAT
+EXPIRATION_TIME=1d
+CLOUD_NAME=ddwsfzb4i
+CLOUD_API=728413219329618
+CLOUD_SECRET=nv1Jk4FgzobaxI5fgsGb8iwCn1E
 
 ### Preview
 
