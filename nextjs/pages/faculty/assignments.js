@@ -10,7 +10,7 @@ function AssignmentBody(){
     const [totalMarks, setTotalMarks] = useState('');
     const [creationDate, setCreationDate] = useState('');
     const [dueDate, setDueDate] = useState('');
-    const [section, setSection] = useState('');
+    // const [section, setSection] = useState('');
     const [file, setFile] = useState(null);
 
     const handleFormSubmit = (e) => {
@@ -51,10 +51,10 @@ function AssignmentBody(){
                     <label htmlFor="dueDate" className="block md-1 font-semibold mb-1">Due Date:</label>
                     <input type="date" id="dueDate" name="dueDate" value={dueDate} onChange={(e) => setDueDate(e.target.value)} required className="w-full px-3 py-2 rounded border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200" />
                 </div>
-                <div className="mb-2">
+                {/* <div className="mb-2">
                     <label htmlFor="section" className="block md-1 font-semibold mb-1">Section:</label>
                     <input type="text" id="section" name="section" value={section} onChange={(e) => setSection(e.target.value)} required className="w-full px-3 py-2 rounded border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200" />
-                </div>
+                </div> */}
                 <div className="col-span-2 mb-2">
                     <label htmlFor="file" className="block md-1 font-semibold mb-1">Upload File:</label>
                     <input type="file" id="file" name="file" onChange={(e) => setFile(e.target.files[0])} required className="w-full px-3 py-2 rounded border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200" />
