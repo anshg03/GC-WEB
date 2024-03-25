@@ -5,9 +5,9 @@ import AddIcon from '@mui/icons-material/Add';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
-import ChecklistIcon from '@mui/icons-material/Checklist';
 import DescriptionIcon from '@mui/icons-material/Description';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import ChecklistIcon from '@mui/icons-material/Checklist';
 
 function Adminlayout({children}) {
   const router = useRouter();
@@ -32,6 +32,7 @@ function Adminlayout({children}) {
                 <ul className="text-white ">
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/dashboard" ><div className='py-2 '><HomeIcon className='pb-1'/> Dashboard</div></Link> </li>
                   <li className="my-2  px-4 hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/students" ><div className='py-2'><PersonIcon className='pb-1'/> Students</div></Link> </li>
+                  <li className="my-2  px-4 hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/facultys" ><div className='py-2'><PersonIcon className='pb-1'/> Faculty</div></Link> </li>
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href='/admin/courses' ><div className='py-2'><AutoStoriesIcon className='pb-1'/> Courses</div></Link></li>
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href='/admin/attendancerecord' ><div className='py-2'><DescriptionIcon className='pb-1'/> Attendance Record</div></Link></li>
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/grading" ><div className='py-2'><CreditScoreIcon className='pb-1'/> Grading</div></Link> </li>

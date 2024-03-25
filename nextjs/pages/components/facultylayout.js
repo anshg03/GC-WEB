@@ -20,10 +20,10 @@ function Facultylayout({children}) {
 
 
   return (
-        <div className='flex items-center pt-8 justify-center w-full'>
-        <div className="flex h-[90vh] w-[90vw] bg-gray-100 rounded-3xl pr-4 shadow-xl border-2 border-gray-100">
+        <div className='flex items-center justify-center w-full'>
+        <div className="flex h-[96vh] w-[96vw] mx-[2vw] my-[2vh] bg-gray-100 rounded-3xl pr-4 shadow-xl border-2 border-gray-100">
           {/* Sidebar */}
-          <aside className="w-12 sm:w-36 md:w-64 bg-gray-800 rounded-l-3xl px-4 overflow-auto">
+          <aside className="w-12 sm:w-36 md:w-64 bg-gray-800 rounded-l-3xl px-4 overflow-auto ">
             <div className="h-full flex flex-col justify-between">
               {/* Sidebar content */}
               <div className="py-4">
@@ -41,7 +41,7 @@ function Facultylayout({children}) {
               <div className="flex w-full items-start justify-center flex-col py-4 gap-2">
                 <button onClick={()=>{
                   router.push("/faculty/updatepassword")
-                }} className="bg-gray-700 text-white py-2 px-4 rounded-lg hover:bg-gray-600">
+                }} className="bg-gray-700 text-yellow-500 py-2 px-4 rounded-lg hover:bg-gray-600">
                   Update Password
                 </button>
                 <button onClick={logoutFunction} className="bg-gray-700 text-red-500 py-2 px-4 rounded-lg hover:bg-gray-600">
