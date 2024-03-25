@@ -18,7 +18,7 @@ function Landingpage() {
         <p className="text-md text-gray-200 mb-4">Login to access student features.</p>
         <Link
           href="/student/studentlogin"
-          className="transition-all shadow-xl group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none hover:scale-105 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="transition-all shadow-xl group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-purple-700 hover:bg-purple-800 focus:outline-none hover:scale-105 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Login
         </Link>
@@ -30,7 +30,7 @@ function Landingpage() {
         <p className="text-md text-gray-200 mb-4">Login to access faculty features.</p>
         <Link
           href="/faculty/facultylogin"
-          className=" transition-all shadow-xl group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none hover:scale-105 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className=" transition-all shadow-xl group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-purple-700 hover:bg-purple-800 focus:outline-none hover:scale-105 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Login
         </Link>
@@ -38,7 +38,7 @@ function Landingpage() {
 
       <div className='flex fixed top-5 right-5 shadow-xl'>
         <Link href='/admin/adminlogin'>
-        <button className='pl-4 pr-2 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 hover:scale-105 transition-all'>
+        <button className='pl-4 pr-2 py-2 rounded-xl bg-purple-700 hover:bg-purple-600 hover:scale-105 transition-all'>
           Admin Login<KeyboardArrowRightIcon/>
         </button>
         </Link>
