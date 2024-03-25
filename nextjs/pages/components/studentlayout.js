@@ -1,9 +1,9 @@
 import React from 'react'
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import AddIcon from '@mui/icons-material/Add';
-import HomeIcon from '@mui/icons-material/Home';
-// import PersonIcon from '@mui/icons-material/Person';
+// import AddIcon from '@mui/icons-material/Add';
+// import HomeIcon from '@mui/icons-material/Home';
+import PersonIcon from '@mui/icons-material/Person';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import ChecklistIcon from '@mui/icons-material/Checklist';
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -28,13 +28,13 @@ function StudentLayout({children}) {
             <div className="p-4">
               <h2 className="text-xl font-bold mb-4">Student Dashboard</h2>
               <ul className="text-white ">
-                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/dashboard" ><div className='py-2 '><HomeIcon className='pb-1'/> Dashboard</div></Link> </li>
+                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/student/profile" ><div className='py-2 '><PersonIcon className='pb-1'/> Profile</div></Link> </li>
                   {/* <li className="my-2  px-4 hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/admin/students" ><div className='py-2'><PersonIcon className='pb-1'/> Students</div></Link> </li> */}
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href='/student/courses' ><div className='py-2'><AutoStoriesIcon className='pb-1'/> Courses</div></Link></li>
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href='/student/attendance' ><div className='py-2'><DescriptionIcon className='pb-1'/> Attendance</div></Link></li>
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer"> <Link href="/student/result" ><div className='py-2'><CreditScoreIcon className='pb-1'/>Result</div></Link> </li>
                   <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer">  <Link href="/student/feedback" ><div className='py-2'><ChecklistIcon className='pb-1'/> Feedback </div></Link></li>
-                  <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer">  <Link href="/admin/addbranch" ><div className='py-2'><AddIcon /> Add Branch</div></Link></li>
+                  {/* <li className="my-2 px-4  hover:bg-gray-700 hover:rounded-lg cursor-pointer">  <Link href="/admin/addbranch" ><div className='py-2'><AddIcon /> Add Branch</div></Link></li> */}
                 </ul>
             </div>
 
@@ -54,7 +54,7 @@ function StudentLayout({children}) {
           <div className="flex-1 p-4 bg-gray-200 rounded-r-3xl">
             
             
-              ({children})
+              {children}
             
           </div>
         </div>

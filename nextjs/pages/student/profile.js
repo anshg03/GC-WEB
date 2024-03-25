@@ -1,10 +1,10 @@
 import React from 'react'
 import StudentLayout from '../components/studentlayout'
 
-function DashboardContent(){
+function ProfileContent(){
   return(
     <>
-    Student Dashboard
+    Student Profile
     </>
   )
 }
@@ -13,7 +13,7 @@ function dashboard() {
   return (
     <> 
       <StudentLayout>
-        <DashboardContent/>
+        <ProfileContent/>
       </StudentLayout>
     </>
   )
