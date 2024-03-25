@@ -1,19 +1,22 @@
-import faculty from "../../../models/faculty.js";
-import connectDB from "../../../middleware/mongoose";
+import faculty from "../../../models/faculty";
+import connectDB from "../../../middlewares/mongoose";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 
 const handler = async (req, res) => {
+  console.log(req.body);
   try {
-    const { username, password } = req.body;
-    const existingFaculty = await faculty.findOne({ username });
+    const { email, password } = req.body;
+    const existingFaculty = await faculty.findOne({ email });
     if (!existingFaculty) {
-      return res.status(404).json("FFaculty doesn't exist.");
+      return res.status(404).json("Faculty doesn't exist.");
     }
-    const isPasswordCorrect = await bcrypt.compare(
-      password,
-      existingFaculty.password
-    );
+    console.log(existingFaculty.dob);
+    // const isPasswordCorrect = await bcrypt.compare(
+    //   password,
+    //   existingFaculty.dob
+    // );
+    const isPasswordCorrect = existingFaculty.dob === password;
     if (!isPasswordCorrect) {
       return res.status(404).json("Invalid Credentials");
     }
@@ -23,7 +26,7 @@ const handler = async (req, res) => {
         id: existingFaculty._id,
       },
       process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_SECRET }
+      { expiresIn: process.env.EXPIRATION_TIME }
     );
     res.status(200).json({ result: existingFaculty, token: token });
   } catch (error) {

@@ -13,16 +13,13 @@ const facultySchema =new Schema({
   password: {
     type: String,
   },
-  username: {
-    type: String,
-  },
   gender: {
     type: String,
   },
-  designation: {
-    type: String,
-    required: true,
-  },
+  // designation: {
+  //   type: String,
+  //   required: true,
+  // },
   branch: {
     type: String,
     required: true,
@@ -44,4 +41,10 @@ const facultySchema =new Schema({
   },
 });
 
-export default mongoose.model("faculty", facultySchema);
+let facultyModel
+if (!mongoose.models.faculty)
+ facultyModel = mongoose.model("faculty", facultySchema);
+
+console.log(mongoose.models.faculty)
+
+export default  mongoose.models.faculty || facultyModel;

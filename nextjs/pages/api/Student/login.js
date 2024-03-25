@@ -1,20 +1,23 @@
 import student from "../../../models/student.js";
-import connectDB from "../../../middleware/mongoose";
+import connectDB from "../../../middlewares/mongoose.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
 const handler = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const existingStudent = await student.findOne({ username });
+    console.log(req.body)
+    const { email, password } = req.body;
+    const existingStudent = await student.findOne({ email: email });
+    console.log(existingStudent)
     if (!existingStudent) {
       return res.status(404).json("Student doesn't exist.");
     }
-    const isPasswordCorrect = await bcrypt.compare(
-      password,
-      existingStudent.password
-    );
-    if (!isPasswordCorrect) {
+    console.log("sdbvhjb")
+    // const isPasswordCorrect = await bcrypt.compare(
+    //   password,
+    //   existingStudent.password
+    // );
+    if (password !== existingStudent.password) {
       return res.status(404).json("Invalid Credentials");
     }
     const token = jwt.sign(
@@ -23,7 +26,7 @@ const handler = async (req, res) => {
         id: existingStudent._id,
       },
       process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_SECRET }
+      { expiresIn: process.env.EXPIRATION_TIME }
     );
     res.status(200).json({ result: existingStudent, token: token });
   } catch (error) {
