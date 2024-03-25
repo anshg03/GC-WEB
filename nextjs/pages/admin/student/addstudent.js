@@ -22,10 +22,10 @@ const AddStudentForm = () => {
       [name]: value
     }));
   };
-  useEffect(() => {
-    console.log("Students:", student)
-    console.log("branches", branches)
-  }, [student, branches])
+  // useEffect(() => {
+  //   console.log("Students:", student)
+  //   console.log("branches", branches)
+  // }, [student, branches])
 
   useEffect(() => {
       fetchBranch()

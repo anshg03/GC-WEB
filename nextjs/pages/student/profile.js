@@ -1,8 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import StudentLayout from '../components/studentlayout'
+import { useRouter } from 'next/router';
 
 function ProfileContent(){
+  const router = useRouter()
   const [student, setStudent] = useState({});
+  useEffect(() => {
+    if (!localStorage.getItem("studentToken")) router.push("../student/studentlogin")
+    const fetchStudent = async () => {
+      await fetch("../api/Admin/getStudent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          token: localStorage.getItem("studentToken")
+        })
+      }).then(res => res.json())
+      .then(res => {
+        setStudent(res.result)
+        console.log(res.result)
+      })
+    }
+    fetchStudent()
+  }, [])
 
   const dummyStudent = {
     name: 'Sophia Anderson',
@@ -15,9 +36,6 @@ function ProfileContent(){
     contactNumber: '9012345678',
     dob: '1998-04-10'
   }
-  useEffect(()=>{
-    setStudent(dummyStudent)
-  },[])
 
   return (
     <div className="container mx-auto p-4">
@@ -57,7 +75,7 @@ function ProfileContent(){
             type="text"
             id="rollNo"
             name="rollNo"
-            value={student.rollNo}
+            value={student.rollNumber}
             readOnly
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
@@ -75,32 +93,7 @@ function ProfileContent(){
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        <div className="mb-2">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="subjects">
-            Subjects
-          </label>
-          <input
-            type="text"
-            id="subjects"
-            name="subjects"
-            value={student.subjects}
-            readOnly
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-        <div className="mb-2">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="gender">
-            Gender
-          </label>
-          <input
-            type="text"
-            id="gender"
-            name="gender"
-            value={student.gender}
-            readOnly
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
+       
         <div className="mb-2">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="branch">
             Branch

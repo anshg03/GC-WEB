@@ -39,15 +39,16 @@ const handler = async (req, res) => {
     // var components = ["STU", date.getFullYear(), departmentHelper, helper];
 
     // var rollNumber = rollNumber;
-    let hashedPassword;
+    // let hashedPassword;
     const newDob = dob.split("-").reverse().join("-");
-    hashedPassword = await bcrypt.hash(newDob, 10);
+    console.log(newDob)
+    // hashedPassword = await bcrypt.hash(newDob, 10);
     var passwordUpdated = false;
 
     const newStudent =new student({
       name,
       dob,
-      password: hashedPassword,
+      password: newDob,
       rollNumber,
       branch: branchName,
       contactNumber,

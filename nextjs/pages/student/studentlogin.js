@@ -11,16 +11,34 @@ const studentlogin = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [student, setStudent] = useState({
+    email: "",
+    password: ""
+  })
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setStudent({
+      ...student, 
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = async (e) => {
     
     e.preventDefault();
-    if (username === 'student' && password === 'password') {
-      alert('Login successful');
-      router.push("/student/profile");
-    } else {
-      setError('Invalid username or password');
-    }
+    await fetch("../api/Student/login", {
+      method: "POST",
+      body: JSON.stringify(student),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => res.json())
+    .then(res => {
+      if (res.token) {
+        localStorage.setItem("studentToken", res.token);
+        router.push("/student/profile")
+      }
+    });
   };
 
   return (
@@ -36,17 +54,17 @@ const studentlogin = () => {
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="username" className="sr-only">
-                Username
+                Email
               </label>
               <input
                 id="username"
-                name="username"
+                name="email"
                 type="text"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Email"
+                value={student.email}
+                onChange={handleChange}
                 autoComplete='off'
               />
             </div>
@@ -61,8 +79,8 @@ const studentlogin = () => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500  sm:text-sm"
                 placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={student.password}
+                onChange={handleChange}
               />
               <button
                 type="button"

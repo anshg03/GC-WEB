@@ -13,7 +13,7 @@ function AllCoursesComponent(){
       .then(res => setCourses(res))
     }
     fetchCourses();
-  })
+  }, [])
     
       
     

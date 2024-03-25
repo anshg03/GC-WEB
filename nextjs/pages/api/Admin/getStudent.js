@@ -8,11 +8,13 @@ import subject from "../../../models/subject";
 
 const handler = async (req, res) => {
   try {
-    const { branch, year } = req.body;
+    const { token } = req.body;
+    const studentToken = jwt.decode(token, process.env.JWT_SECRET)
+    const email = studentToken.email
     const errors = { noStudentError: String };
-    const students = await student.find({ branch, year });
+    const students = await student.findOne({ email:email });
 
-    if (students.length === 0) {
+    if (!students) {
       errors.noStudentError = "No Student Found";
       return res.status(404).json(errors);
     }

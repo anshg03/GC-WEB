@@ -8,6 +8,46 @@ function CoursesContent(){
   const [showCourses, setShowCourses] = useState(true)
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [availableCourses,setAvailableCourses] = useState([]);
+  const [courses, setCourses] = useState([])
+  useEffect(() => {
+    if (!localStorage.getItem("studentToken")) router.push("../student/studentlogin")
+    const fetchCourses = async () => {
+      await fetch("../../api/Admin/getAllSubjects", {
+        method: "GET"
+      }).then(res => res.json())
+      .then(res => {
+        setCourses(res)
+        console.log(res)
+      })
+    }
+    fetchCourses();
+  }, [])
+  useEffect(() => {
+    const fetchStudent = async () => {
+      await fetch("../api/Admin/getStudent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          token: localStorage.getItem("studentToken")
+        })
+      }).then(res => res.json())
+      .then(res => {
+        setStudent(res.result)
+        if (courses.length!== 0) {
+          const arr = courses.filter(course => {
+            return (
+              course.department === res.result.branch && course.year == res.result.year
+            )
+          })
+          console.log(arr)
+          setAvailableCourses(arr)
+        }
+      })
+    }
+    fetchStudent()
+  }, [courses])
   
   const dummyStudent = {
     name: 'Sophia Anderson',
