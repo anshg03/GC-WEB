@@ -52,7 +52,7 @@ function StudentLayout({children}) {
           </div>
           
           {/* Main Content */}
-          <div className="flex-1 p-4 bg-gray-200 rounded-r-3xl">
+          <div className="flex-1 p-4 bg-gray-200 rounded-r-3xl overflow-auto">
             
             
               {children}
