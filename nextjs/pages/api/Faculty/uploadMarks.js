@@ -1,5 +1,5 @@
 import student from "../../../models/student.js";
-import connectDB from "../../../middleware/mongoose";
+import connectDB from "../../../middlewares/mongoose";
 import test from "../../../models/test.js";
 import branch from "../../../models/branch.js";
 import jwt from "jsonwebtoken";

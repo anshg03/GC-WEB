@@ -1,5 +1,5 @@
 import faculty from "../../../models/faculty.js";
-import connectDB from "../../../middleware/mongoose";
+import connectDB from "../../../middlewares/mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
